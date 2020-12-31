@@ -7,12 +7,19 @@ import Footer from './Footer/Footer';
 
 import { PortfolioProvider } from '../context/context';
 
-import { heroData, aboutData, projectsData, contactData, footerData } from '../mock/data';
+import {
+  heroData,
+  aboutData,
+  projectsData,
+  IProjectData,
+  contactData,
+  footerData,
+} from '../mock/data';
 
-function App() {
+const App: React.FC = () => {
   const [hero, setHero] = useState({});
   const [about, setAbout] = useState({});
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<IProjectData[]>([]);
   const [contact, setContact] = useState({});
   const [footer, setFooter] = useState({});
 
@@ -33,6 +40,6 @@ function App() {
       <Footer />
     </PortfolioProvider>
   );
-}
+};
 
 export default App;

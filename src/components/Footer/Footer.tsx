@@ -6,7 +6,7 @@ import GithubButtons from '../GithubButtons/GithubButtons';
 
 import { githubButtons } from '../../mock/data';
 
-const Footer = () => {
+const Footer: React.FC = () => {
   const { footer } = useContext(PortfolioContext);
   const { networks } = footer;
   const { isEnabled } = githubButtons;
@@ -21,7 +21,7 @@ const Footer = () => {
         </span>
         <div className="social-links">
           {networks &&
-            networks.map((network) => {
+            networks.map((network: { id: any; name: any; url: any; }) => {
               const { id, name, url } = network;
               return (
                 <a

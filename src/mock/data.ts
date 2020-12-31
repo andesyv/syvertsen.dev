@@ -24,6 +24,16 @@ export const aboutData = {
   resume: 'https://www.resumemaker.online/es.php', // if no resume, the button will not show up
 };
 
+export interface IProjectData {
+  id: string;
+  img: string;
+  title: string;
+  info: string;
+  info2: string;
+  url: string;
+  repo: string;
+}
+
 // PROJECTS DATA
 export const projectsData = [
   {
