@@ -7,32 +7,19 @@ import Footer from './Footer/Footer';
 
 import { PortfolioProvider } from '../context/context';
 
-import {
-  heroData,
-  aboutData,
-  projectsData,
-  IProjectData,
-  contactData,
-  footerData,
-} from '../mock/data';
+import { projectsData, IProjectData, footerData, IData } from '../mock/data';
 
 const App: React.FC = () => {
-  const [hero, setHero] = useState({});
-  const [about, setAbout] = useState({});
   const [projects, setProjects] = useState<IProjectData[]>([]);
-  const [contact, setContact] = useState({});
-  const [footer, setFooter] = useState({});
+  const [footer, setFooter] = useState<IData['footer']>({} as any);
 
   useEffect(() => {
-    setHero({ ...heroData });
-    setAbout({ ...aboutData });
     setProjects([...projectsData]);
-    setContact({ ...contactData });
     setFooter({ ...footerData });
   }, []);
 
   return (
-    <PortfolioProvider value={{ hero, about, projects, contact, footer }}>
+    <PortfolioProvider value={{ projects, footer }}>
       <Hero />
       <About />
       <Projects />

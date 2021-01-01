@@ -4,11 +4,11 @@ import { Link } from 'react-scroll';
 import PortfolioContext from '../../context/context';
 import GithubButtons from '../GithubButtons/GithubButtons';
 
-import { githubButtons } from '../../mock/data';
+import { githubButtons, IFooterData } from '../../mock/data';
 
 const Footer: React.FC = () => {
   const { footer } = useContext(PortfolioContext);
-  const { networks } = footer;
+  const networks = footer.networks;
   const { isEnabled } = githubButtons;
 
   return (
@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
         </span>
         <div className="social-links">
           {networks &&
-            networks.map((network: { id: any; name: any; url: any; }) => {
+            networks.map((network: IFooterData) => {
               const { id, name, url } = network;
               return (
                 <a

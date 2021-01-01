@@ -1,22 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Fade } from 'react-awesome-reveal';
 import { Link } from 'react-scroll';
-import PortfolioContext from '../../context/context';
 
 const Header: React.FC = () => {
-  const { hero } = useContext(PortfolioContext);
-  const { title, name, subtitle, cta } = hero;
-
   const [isDesktop, setIsDesktop] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     if (window.innerWidth > 769) {
       setIsDesktop(true);
-      setIsMobile(false);
     } else {
-      setIsMobile(true);
       setIsDesktop(false);
     }
   }, []);
@@ -30,10 +23,10 @@ const Header: React.FC = () => {
           delay={500} /* distance="30px" */
         >
           <h1 className="hero-title">
-            {title || 'Hi, my name is'}{' '}
-            <span className="text-color-main">{name || 'Your Name'}</span>
+            {'Hi, my name is '}
+            <span className="text-color-main">{'Anders Syvertsen'}</span>
             <br />
-            {subtitle || "I'm the Unknown Developer."}
+            {"I'm a fullstack developer and a computer graphics enthusiast."}
           </h1>
         </Fade>
         <Fade
@@ -44,7 +37,7 @@ const Header: React.FC = () => {
           <p className="hero-cta">
             <span className="cta-btn cta-btn--hero">
               <Link to="about" smooth={true} duration={1000}>
-                {cta || 'Know more'}
+                {'Learn more'}
               </Link>
             </span>
           </p>

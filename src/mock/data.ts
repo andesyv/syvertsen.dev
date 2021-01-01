@@ -1,29 +1,5 @@
 import { nanoid } from 'nanoid';
 
-// HEAD DATA
-export const headData = {
-  title: '', // e.g: 'Name | Developer'
-  lang: '', // e.g: en, es, fr, jp
-  description: '', // e.g: Welcome to my website
-};
-
-// HERO DATA
-export const heroData = {
-  title: '',
-  name: '',
-  subtitle: '',
-  cta: '',
-};
-
-// ABOUT DATA
-export const aboutData = {
-  img: 'profile.jpg',
-  paragraphOne: '',
-  paragraphTwo: '',
-  paragraphThree: '',
-  resume: 'https://www.resumemaker.online/es.php', // if no resume, the button will not show up
-};
-
 export interface IProjectData {
   id: string;
   img: string;
@@ -65,12 +41,11 @@ export const projectsData = [
   },
 ];
 
-// CONTACT DATA
-export const contactData = {
-  cta: '',
-  btn: '',
-  email: '',
-};
+export interface IFooterData {
+  id: string;
+  name: string;
+  url: string;
+}
 
 // FOOTER DATA
 export const footerData = {
@@ -97,6 +72,13 @@ export const footerData = {
     },
   ],
 };
+
+export interface IData {
+  projects: IProjectData[];
+  footer: {
+    networks: IFooterData[];
+  };
+}
 
 // Github start/fork buttons
 export const githubButtons = {
