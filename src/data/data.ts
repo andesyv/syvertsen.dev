@@ -20,14 +20,14 @@ export const projectsData: IProjectData[] = [
     title: 'Big Butler Battle',
     info: [
       'A local splitscreen multiplayer game about skating around a castle as a butler.',
-      'This project was our bachelor project that I made together with one other programmer and 2 artists over half a year.'
+      'This project was our bachelor project that I made together with one other programmer and 2 artists over half a year.',
     ],
     link: { text: 'Check out', url: 'https://spacedance.itch.io/big-butler-battle' },
     repo: 'https://github.com/Skau/BigButlerBattle', // if no repo, the button will not show up
   },
   {
     id: nanoid(),
-    img: 'projects/ChristmasWebGL.png',
+    img: 'projects/ChristmasWebGL.gif',
     title: 'Christmas WebGL',
     info: ['A small christmassy themed rendering made with WebGL 2.0'],
     link: { url: 'https://andesyv.github.io/ChristmasWebGL/' },

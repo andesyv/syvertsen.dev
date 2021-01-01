@@ -1,5 +1,5 @@
 import React from 'react';
-import { IData } from '../mock/data';
+import { IData } from '../data/data';
 
 const PortfolioContext = React.createContext<IData>({} as any); // Undefined default value
 

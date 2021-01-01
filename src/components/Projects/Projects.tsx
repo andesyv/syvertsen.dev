@@ -7,7 +7,7 @@ import Title from '../Title/Title';
 import ProjectImg from '../Image/ProjectImg';
 
 const Projects: React.FC = () => {
-  const { projects } = useContext(PortfolioContext);
+  const projects = useContext(PortfolioContext).projects;
 
   const [isDesktop, setIsDesktop] = useState(false);
 

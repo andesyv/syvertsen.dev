@@ -1,41 +1,55 @@
 import React from 'react';
-import { StaticQuery, graphql } from 'gatsby';
-import PropTypes from 'prop-types';
-import Img from 'gatsby-image';
+import { graphql, useStaticQuery } from 'gatsby';
+import Img, { FluidObject } from 'gatsby-image';
 
-const ProjectImg = ({ filename, alt }) => (
-  <StaticQuery
-    query={graphql`
-      query {
-        images: allFile {
-          edges {
-            node {
-              relativePath
-              name
-              childImageSharp {
-                fluid(maxWidth: 1366) {
-                  ...GatsbyImageSharpFluid
-                }
+interface Props {
+  filename: string;
+  alt: string;
+}
+
+interface ImageNode {
+  node: {
+    name: string;
+    relativePath: string;
+    childImageSharp: {
+      fluid: FluidObject;
+    };
+    publicURL: string;
+  };
+}
+interface QueryData {
+  images: {
+    edges: ImageNode[];
+  };
+}
+
+const ProjectImg: React.FC<Props> = ({ filename, alt }) => {
+  const data: QueryData = useStaticQuery(graphql`
+    query {
+      images: allFile {
+        edges {
+          node {
+            relativePath
+            name
+            childImageSharp {
+              fluid(maxWidth: 1366) {
+                ...GatsbyImageSharpFluid
               }
             }
+            publicURL
           }
         }
       }
-    `}
-    render={(data) => {
-      const image = data.images.edges.find((n) => n.node.relativePath.includes(filename));
+    }
+  `);
 
-      if (!image) return null;
+  const image = data.images.edges.find((n) => n.node.relativePath.includes(filename));
+  if (!image) return null;
 
-      const imageFluid = image.node.childImageSharp.fluid;
-      return <Img alt={alt} fluid={imageFluid} />;
-    }}
-  />
-);
-
-ProjectImg.propTypes = {
-  filename: PropTypes.string,
-  alt: PropTypes.string,
+  return image.node.childImageSharp ? (
+    <Img alt={alt} fluid={image.node.childImageSharp.fluid} />
+  ) : (
+    <img alt={alt} src={image.node.publicURL} width="100%" />
+  );
 };
-
 export default ProjectImg;
