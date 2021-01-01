@@ -7,7 +7,7 @@ import Footer from './Footer/Footer';
 
 import { PortfolioProvider } from '../context/context';
 
-import { projectsData, IProjectData, footerData, IData } from '../mock/data';
+import { projectsData, IProjectData, footerData, IData } from '../data/data';
 
 const App: React.FC = () => {
   const [projects, setProjects] = useState<IProjectData[]>([]);

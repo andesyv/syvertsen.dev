@@ -4,39 +4,40 @@ export interface IProjectData {
   id: string;
   img: string;
   title: string;
-  info: string;
-  info2: string;
-  url: string;
+  info: string[];
+  link?: {
+    text?: string;
+    url: string;
+  };
   repo: string;
 }
 
 // PROJECTS DATA
-export const projectsData = [
+export const projectsData: IProjectData[] = [
   {
     id: nanoid(),
-    img: 'project.jpg',
-    title: '',
-    info: '',
-    info2: '',
-    url: '',
-    repo: 'https://github.com/cobidev/react-simplefolio', // if no repo, the button will not show up
+    img: 'projects/BigButlerBattle.png',
+    title: 'Big Butler Battle',
+    info: [
+      'A local splitscreen multiplayer game about skating around a castle as a butler.',
+      'This project was our bachelor project that I made together with one other programmer and 2 artists over half a year.'
+    ],
+    link: { text: 'Check out', url: 'https://spacedance.itch.io/big-butler-battle' },
+    repo: 'https://github.com/Skau/BigButlerBattle', // if no repo, the button will not show up
+  },
+  {
+    id: nanoid(),
+    img: 'projects/ChristmasWebGL.png',
+    title: 'Christmas WebGL',
+    info: ['A small christmassy themed rendering made with WebGL 2.0'],
+    link: { url: 'https://andesyv.github.io/ChristmasWebGL/' },
+    repo: 'https://github.com/andesyv/ChristmasWebGL', // if no repo, the button will not show up
   },
   {
     id: nanoid(),
     img: 'project.jpg',
     title: '',
-    info: '',
-    info2: '',
-    url: '',
-    repo: 'https://github.com/cobidev/react-simplefolio', // if no repo, the button will not show up
-  },
-  {
-    id: nanoid(),
-    img: 'project.jpg',
-    title: '',
-    info: '',
-    info2: '',
-    url: '',
+    info: [],
     repo: 'https://github.com/cobidev/react-simplefolio', // if no repo, the button will not show up
   },
 ];
