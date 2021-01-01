@@ -3,6 +3,7 @@ import { Fade } from 'react-awesome-reveal';
 import { Container, Row, Col } from 'react-bootstrap';
 import Title from '../Title/Title';
 import AboutImg from '../Image/AboutImg';
+import { DateTime, Interval } from 'luxon';
 
 const About: React.FC = () => {
   const [isDesktop, setIsDesktop] = useState(false);
@@ -15,39 +16,33 @@ const About: React.FC = () => {
     }
   }, []);
 
+  const birthday = DateTime.local(1997, 3, 6);
+
   return (
     <section id="about">
       <Container>
         <Title title="About Me" />
         <Row className="about-wrapper">
-          <Col md={6} sm={12}>
-            <Fade duration={1000} delay={600} direction="up" /* distance="30px" */>
+          {/* <Col md={6} sm={12}>
+            <Fade duration={1000} delay={600} direction="up" /* distance="30px" >
               <div className="about-wrapper__image">
                 <AboutImg alt="profile picture" filename={'profile.jpg'} />
               </div>
             </Fade>
-          </Col>
-          <Col md={6} sm={12}>
-            <Fade
-              direction={isDesktop ? 'right' : 'up'}
-              duration={1000}
-              delay={1000} /* distance="30px" */
-            >
-              <div className="about-wrapper__info">
-                <p className="about-wrapper__info-text">
-                  {
-                    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi neque, ipsa animi maiores repellendu distinctioaperiam earum dolor voluptatum consequatur blanditiis inventore debitis fuga numquam voluptate architecto itaque molestiae.'
-                  }
-                </p>
-                <p className="about-wrapper__info-text">
-                  {
-                    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi neque, ipsa animi maiores repellendu distinctioaperiam earum dolor voluptatum consequatur blanditiis inventore debitis fuga numquam voluptate architecto itaque molestiae.'
-                  }
-                </p>
-                <p className="about-wrapper__info-text">
-                  {'Lorem ipsum dolor sit, amet consectetur adipisicing elit.'}
-                </p>
-                {/* resume && (
+          </Col> */}
+          {/* <Col md={6} sm={12}> */}
+          <Fade
+            direction={isDesktop ? 'right' : 'up'}
+            duration={1000}
+            delay={1000} /* distance="30px" */
+          >
+            <div className="about-wrapper__info">
+              <p className="about-wrapper__info-text">
+                {`I'm a fullstack developer with a passion for computer graphics and real-time rendering. ${Math.floor(
+                  Interval.fromDateTimes(birthday, DateTime.local()).length('years')
+                )} years of age, I am currently taking a masters degree in informatics specialized in visualization. I also have a bachelors degree in games and games technology.`}
+              </p>
+              {/* resume && (
                   <span className="d-flex mt-3">
                     <a
                       target="_blank"
@@ -59,9 +54,9 @@ const About: React.FC = () => {
                     </a>
                   </span>
                 ) */}
-              </div>
-            </Fade>
-          </Col>
+            </div>
+          </Fade>
+          {/* </Col> */}
         </Row>
       </Container>
     </section>
