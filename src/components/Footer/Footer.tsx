@@ -4,12 +4,11 @@ import { Link } from 'react-scroll';
 import PortfolioContext from '../../context/context';
 import GithubButtons from '../GithubButtons/GithubButtons';
 
-import { githubButtons, IFooterData } from '../../data/data';
+import { IFooterData } from '../../data/data';
 
 const Footer: React.FC = () => {
   const { footer } = useContext(PortfolioContext);
   const networks = footer.networks;
-  const { isEnabled } = githubButtons;
 
   return (
     <footer className="footer navbar-static-bottom">
@@ -37,14 +36,17 @@ const Footer: React.FC = () => {
             })}
         </div>
         <hr />
+        <p className="footer__text">© {new Date().getFullYear()} Anders Syvertsen</p>
+        <GithubButtons repo="andesyv/syvertsen.dev" type="star" />
+        <GithubButtons repo="andesyv/syvertsen.dev" type="issue" />
         <p className="footer__text">
-          © {new Date().getFullYear()} - Template developed by{' '}
+          Template developed by{' '}
           <a href="https://github.com/cobidev" target="_blank" rel="noopener noreferrer">
             Jacobo Martínez
           </a>
         </p>
-
-        {isEnabled && <GithubButtons />}
+        <GithubButtons repo="cobidev/gatsby-simplefolio" type="fork" />
+        <GithubButtons repo="cobidev/gatsby-simplefolio" type="star" />
       </Container>
     </footer>
   );
