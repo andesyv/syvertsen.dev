@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid';
 
 export interface IProjectData {
   id: string;
-  img: string;
+  img?: string;
   title: string;
   info: string[];
   link?: {
@@ -33,13 +33,26 @@ export const projectsData: IProjectData[] = [
     link: { url: 'https://andesyv.github.io/ChristmasWebGL/' },
     repo: 'https://github.com/andesyv/ChristmasWebGL', // if no repo, the button will not show up
   },
-  // {
-  //   id: nanoid(),
-  //   img: 'project.jpg',
-  //   title: '',
-  //   info: [],
-  //   repo: 'https://github.com/cobidev/react-simplefolio', // if no repo, the button will not show up
-  // },
+  {
+    id: nanoid(),
+    title: 'Game Engine (ECSMTGE)',
+    info: [
+      'A small game engine making use of the data oriented design pattern Entity Component System, which also features a JavaScript live-scripting engine.',
+      'Made by me and another programmer as a semester project.',
+    ],
+    repo: 'https://github.com/andesyv/ECSMTGE',
+  },
+  {
+    id: nanoid(),
+    title: 'ThonkBot',
+    info: ['A small Discord bot I made for fun with a few friends.'],
+    link: {
+      text: 'Add bot to server?',
+      url:
+        'https://discord.com/oauth2/authorize?&client_id=492017860068114444&scope=bot&permissions=201427968',
+    },
+    repo: 'https://github.com/andesyv/ThonkBot',
+  },
 ];
 
 export interface IFooterData {

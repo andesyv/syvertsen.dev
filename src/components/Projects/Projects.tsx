@@ -26,10 +26,11 @@ const Projects: React.FC = () => {
           <Title title="Projects" />
           {projects.map((project) => {
             const { title, info, link, repo, img, id } = project;
+            const twoColumns: boolean = img != undefined;
 
             return (
               <Row key={id}>
-                <Col lg={4} sm={12}>
+                <Col lg={twoColumns ? 4 : 12} sm={12}>
                   <Fade
                     direction={isDesktop ? 'right' : 'up'}
                     duration={1000}
@@ -71,41 +72,43 @@ const Projects: React.FC = () => {
                     </div>
                   </Fade>
                 </Col>
-                <Col lg={8} sm={12}>
-                  <Fade
-                    direction={isDesktop ? 'left' : 'up'}
-                    duration={1000}
-                    delay={1000}
-                    /* distance="30px" */
-                  >
-                    <div className="project-wrapper__image">
-                      <a
-                        target="_blank"
-                        aria-label="Project Link"
-                        rel="noopener noreferrer"
-                        {...(link ? { href: link.url } : {})}
-                      >
-                        <Tilt
-                          options={{
-                            reverse: false,
-                            max: 8,
-                            perspective: 1000,
-                            scale: 1,
-                            speed: 300,
-                            transition: true,
-                            axis: null,
-                            reset: true,
-                            easing: 'cubic-bezier(.03,.98,.52,.99)',
-                          }}
+                {twoColumns && (
+                  <Col lg={8} sm={12}>
+                    <Fade
+                      direction={isDesktop ? 'left' : 'up'}
+                      duration={1000}
+                      delay={1000}
+                      /* distance="30px" */
+                    >
+                      <div className="project-wrapper__image">
+                        <a
+                          target="_blank"
+                          aria-label="Project Link"
+                          rel="noopener noreferrer"
+                          {...(link ? { href: link.url } : {})}
                         >
-                          <div data-tilt className="thumbnail rounded">
-                            <ProjectImg alt={title} filename={img} />
-                          </div>
-                        </Tilt>
-                      </a>
-                    </div>
-                  </Fade>
-                </Col>
+                          <Tilt
+                            options={{
+                              reverse: false,
+                              max: 8,
+                              perspective: 1000,
+                              scale: 1,
+                              speed: 300,
+                              transition: true,
+                              axis: null,
+                              reset: true,
+                              easing: 'cubic-bezier(.03,.98,.52,.99)',
+                            }}
+                          >
+                            <div data-tilt className="thumbnail rounded">
+                              <ProjectImg alt={title} filename={img as string} />
+                            </div>
+                          </Tilt>
+                        </a>
+                      </div>
+                    </Fade>
+                  </Col>
+                )}
               </Row>
             );
           })}
