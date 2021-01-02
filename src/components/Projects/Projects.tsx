@@ -48,7 +48,13 @@ const Projects: React.FC = () => {
                         {/* <p className="mb-4">{info2 || ''}</p> */}
                       </div>
                       {link && (
-                        <a className="cta-btn cta-btn--hero" href={link.url}>
+                        <a
+                          target="_blank"
+                          aria-label="Project Link"
+                          rel="noopener noreferrer"
+                          className="cta-btn cta-btn--hero"
+                          href={link.url}
+                        >
                           {link.text || 'See Live'}
                         </a>
                       )}
