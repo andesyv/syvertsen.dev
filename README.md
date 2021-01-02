@@ -1,6 +1,8 @@
 # Syvertsen.dev
 
-This is my personal portfolio webpage which is made using Gatsby from the template made by [Jacobo Martínez](https://github.com/cobidev), and hosted by netlify.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/17825fb0-5c8a-4c5d-8a1e-31dafbe43da5/deploy-status)](https://app.netlify.com/sites/syvertsendev/deploys)
+
+This is my personal portfolio webpage, which is made using Gatsby from the template made by [Jacobo Martínez](https://github.com/cobidev). The page is hosted on netlify.
 
 ## Deployment
 
@@ -29,4 +31,4 @@ npm start
 
 ## Licence
 
-The template is modified and redistributed under the licence in [LICENCE.md](LICENCE.md). All unchanged parts of the template is licenced under [gatsby-simplefolio-LICENCE.md](gatsby-simplefolio-LICENCE.md).
+The template by [Jacobo Martínez](https://github.com/cobidev) is modified and redistributed under the licence in [LICENCE.md](LICENCE.md). All unchanged parts of the template is licenced under [gatsby-simplefolio-LICENCE.md](gatsby-simplefolio-LICENCE.md).
