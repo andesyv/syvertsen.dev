@@ -36,6 +36,7 @@ const Projects: React.FC = () => {
                     duration={1000}
                     delay={500}
                     /* distance="30px" */
+                    triggerOnce={true}
                   >
                     <div className="project-wrapper__text">
                       <h3 className="project-wrapper__text-title">{title || 'Project Title'}</h3>
@@ -79,6 +80,7 @@ const Projects: React.FC = () => {
                       duration={1000}
                       delay={1000}
                       /* distance="30px" */
+                      triggerOnce={true}
                     >
                       <div className="project-wrapper__image">
                         <a

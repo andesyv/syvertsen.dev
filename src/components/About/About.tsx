@@ -35,6 +35,7 @@ const About: React.FC = () => {
             direction={isDesktop ? 'right' : 'up'}
             duration={1000}
             delay={1000} /* distance="30px" */
+            triggerOnce={true}
           >
             <div className="about-wrapper__info">
               <p className="about-wrapper__info-text">

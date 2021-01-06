@@ -8,7 +8,7 @@ const Contact: React.FC = () => {
     <section id="contact">
       <Container>
         <Title title="Contact" />
-        <Fade direction="up" duration={1000} delay={800} /* distance="30px" */>
+        <Fade direction="up" duration={1000} delay={800} /* distance="30px" */ triggerOnce={true}>
           <div className="contact-wrapper">
             <p className="contact-wrapper__text">{'Would you like to work with me? Awesome!'}</p>
             <a

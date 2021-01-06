@@ -21,6 +21,7 @@ const Header: React.FC = () => {
           direction={isDesktop ? 'right' : 'up'}
           duration={1000}
           delay={500} /* distance="30px" */
+          triggerOnce={true}
         >
           <h1 className="hero-title">
             {'Hi, my name is '}
@@ -33,6 +34,7 @@ const Header: React.FC = () => {
           direction={isDesktop ? 'right' : 'up'}
           duration={1000}
           delay={1000} /* distance="30px" */
+          triggerOnce={true}
         >
           <p className="hero-cta">
             <span className="cta-btn cta-btn--hero">
