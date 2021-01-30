@@ -53,6 +53,21 @@ export const projectsData: IProjectData[] = [
     },
     repo: 'https://github.com/andesyv/ThonkBot',
   },
+  {
+    id: nanoid(),
+    img: 'projects/RaytracingWebGL.gif',
+    title: 'Raytracting WebGL',
+    info: ['Some very basic raytracing in WebGL'],
+    link: { url: 'https://andesyv.github.io/RaytracingWebGL/' },
+    repo: 'https://github.com/andesyv/RaytracingWebGL',
+  },
+  {
+    id: nanoid(),
+    title: 'Noise Cubemap Generator',
+    info: ['A small webtool for generating noisy cubemaps'],
+    link: { url: 'https://andesyv.github.io/noise-cubemap-generator/' },
+    repo: 'https://github.com/andesyv/noise-cubemap-generator',
+  },
 ];
 
 export interface IFooterData {
