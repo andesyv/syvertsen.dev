@@ -1,4 +1,4 @@
-# Syvertsen.dev
+# [Syvertsen.dev](https://syvertsen.dev/)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/17825fb0-5c8a-4c5d-8a1e-31dafbe43da5/deploy-status)](https://app.netlify.com/sites/syvertsendev/deploys)
 
