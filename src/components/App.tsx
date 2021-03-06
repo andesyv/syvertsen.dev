@@ -4,7 +4,8 @@ import About from './About/About';
 import Projects from './Projects/Projects';
 import Contact from './Contact/Contact';
 import Footer from './Footer/Footer';
-import Confetti from 'react-confetti'
+import Confetti from 'react-confetti';
+import { useWindowSize } from '@react-hook/window-size';
 
 import { PortfolioProvider } from '../context/context';
 
@@ -13,6 +14,7 @@ import { projectsData, IProjectData, footerData, IData } from '../data/data';
 const App: React.FC = () => {
   const [projects, setProjects] = useState<IProjectData[]>([]);
   const [footer, setFooter] = useState<IData['footer']>({} as any);
+  const [width, height] = useWindowSize();
 
   useEffect(() => {
     setProjects([...projectsData]);
@@ -26,7 +28,7 @@ const App: React.FC = () => {
 
   return (
     <PortfolioProvider value={{ projects, footer }}>
-      {isBirthday() && <Confetti />}
+      {isBirthday() && <Confetti width={width} height={height} />}
       <Hero />
       <About />
       <Projects />
