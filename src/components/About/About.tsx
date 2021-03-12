@@ -17,12 +17,6 @@ const About: React.FC = () => {
   }, []);
 
   const birthday = DateTime.local(1997, 3, 6);
-  // https://stackoverflow.com/questions/60458193/how-can-you-trigger-a-rerender-of-a-react-js-component-every-minute
-  const [fakeCurrentDate, setFakeCurrentDate] = useState(DateTime.local()); // default value can be anything you want
-
-  useEffect(() => {
-    setTimeout(() => setFakeCurrentDate(DateTime.local()), 60000);
-  }, [fakeCurrentDate]);
 
   return (
     <section id="about">
@@ -45,12 +39,8 @@ const About: React.FC = () => {
           >
             <div className="about-wrapper__info">
               <p className="about-wrapper__info-text">
-                {`I'm a fullstack developer with a passion for computer graphics and real-time rendering. ${(
-                  Math.floor(
-                    Interval.fromDateTimes(birthday, fakeCurrentDate).length('years') * 100
-                  ) / 100
-                ).toFixed(
-                  2
+                {`I'm a fullstack developer with a passion for computer graphics and real-time rendering. ${Math.floor(
+                  Interval.fromDateTimes(birthday, DateTime.local()).length('years')
                 )} years of age, I am currently taking a masters degree in informatics specialized in visualization. I also have a bachelors degree in games and games technology.`}
               </p>
               {/* resume && (
