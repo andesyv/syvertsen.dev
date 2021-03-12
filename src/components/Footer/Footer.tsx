@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
               return (
                 <a
                   key={id}
-                  href={url || 'https://github.com/cobidev/gatsby-simplefolio'}
+                  href={url || 'syvertsen.dev'}
                   rel="noopener noreferrer"
                   target="_blank"
                   aria-label={name}
