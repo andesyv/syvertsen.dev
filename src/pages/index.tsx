@@ -5,11 +5,11 @@ import Confetti from 'react-confetti';
 import { GetStaticProps } from 'next';
 
 // Components:
-import Hero from '../components/Hero/Hero';
-import About from '../components/About/About';
-import Projects from '../components/Projects/Projects';
-import Contact from '../components/Contact/Contact';
-import Footer from '../components/Footer/Footer';
+import Hero from '../components/Hero';
+import About from '../components/About';
+import Projects from '../components/Projects';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
 
 // Data:
 import { PortfolioProvider } from '../context/context';
