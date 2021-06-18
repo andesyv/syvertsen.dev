@@ -1,38 +1,11 @@
-import React, { PureComponent, Component } from 'react';
-
-// import GitHubButton from 'react-github-btn';
+import React from 'react';
+import dynamic from 'next/dynamic';
 import { GitHubButtonProps } from 'github-buttons';
 
-interface GHStateInterface {
-  element: React.ReactElement
-}
-class ButtonComponent extends React.PureComponent<GitHubButtonProps, GHStateInterface> {
-  constructor(props: GitHubButtonProps) {
-    super(props);
-    this.state = { element: <span /> };
-  }
-
-  async componentDidMount() {
-    if (typeof window !== 'undefined') {
-      window.render = require('github-buttons').render;
-    }
-
-    const response = await new Promise<HTMLIFrameElement | HTMLSpanElement>((resolve) => {
-      render(this.props, (el: HTMLIFrameElement | HTMLSpanElement) => {
-        resolve(el);
-      });  
-    });
-    this.setState({ element: <>{response}</> });
-  }
-
-  render() {
-    return (
-      <div>
-        {this.state.element}
-      </div>
-    );
-  }
-}
+const DynamicGithubButton = dynamic(
+  () => import('react-github-btn'),
+  { ssr: false }
+);
 
 const capitalizeFirst = (str: string): string => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -70,9 +43,9 @@ const GithubButton: React.FC<Props> = (props) => {
 
   return (
     <>
-      <ButtonComponent {...args}>
+      <DynamicGithubButton {...args}>
         {props.children || props.label || capitalizeFirst(props.type)}
-      </ButtonComponent>
+      </DynamicGithubButton>
     </>
   );
 };
