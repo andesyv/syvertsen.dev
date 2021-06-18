@@ -1,55 +1,69 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import Img, { FluidObject } from 'gatsby-image';
+import Image from 'next/image';
+import Tilt from 'react-tilt';
 
 interface Props {
   filename: string;
   alt: string;
 }
 
-interface ImageNode {
-  node: {
-    name: string;
-    relativePath: string;
-    childImageSharp: {
-      fluid: FluidObject;
+interface ImageState {
+  width: number;
+  height: number;
+}
+
+class StaticImage extends React.PureComponent<Props, ImageState> {
+  constructor(props: Props) {
+    super(props);
+    this.state = { width: 300, height: 300 };
+  }
+
+  render() {
+    const onImgLoad = ({ target }: React.SyntheticEvent<HTMLImageElement, Event>) => {
+      const img = target as HTMLImageElement;
+      const maxWidth = 720;
+      console.log(`width: ${img.naturalWidth}, height: ${img.naturalHeight}`);
+
+      const w = maxWidth;
+      // w / width = h / height
+      // height * w / width = h 
+      const h = (img.naturalHeight * w) / img.naturalWidth;
+
+      this.setState({ width: w, height: h });
     };
-    publicURL: string;
-  };
+
+    return (
+      <Tilt
+        options={{
+          reverse: false,
+          max: 8,
+          perspective: 1000,
+          scale: 1,
+          speed: 300,
+          transition: true,
+          axis: null,
+          reset: true,
+          easing: 'cubic-bezier(.03,.98,.52,.99)',
+        }}
+      >
+        <div
+          data-tilt
+          className="thumbnail rounded"
+          style={{ position: 'relative', width: this.state.width, height: this.state.height }}
+        >
+          <Image
+            src={`/projects/${this.props.filename}`}
+            alt={this.props.alt}
+            onLoad={onImgLoad}
+            layout={'fill'}
+            objectFit={'fill'}
+          />
+        </div>
+      </Tilt>
+    );
+  }
 }
-interface QueryData {
-  images: {
-    edges: ImageNode[];
-  };
-}
 
-const ProjectImg: React.FC<Props> = ({ filename, alt }) => {
-  const data: QueryData = useStaticQuery(graphql`
-    query {
-      images: allFile {
-        edges {
-          node {
-            relativePath
-            name
-            childImageSharp {
-              fluid(maxWidth: 1366) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-            publicURL
-          }
-        }
-      }
-    }
-  `);
+const ProjectImg: React.FC<Props> = (props) => <StaticImage {...props} />;
 
-  const image = data.images.edges.find((n) => n.node.relativePath.includes(filename));
-  if (!image) return null;
-
-  return image.node.childImageSharp ? (
-    <Img alt={alt} fluid={image.node.childImageSharp.fluid} />
-  ) : (
-    <img alt={alt} src={image.node.publicURL} width="100%" />
-  );
-};
 export default ProjectImg;

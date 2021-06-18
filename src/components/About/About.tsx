@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { Container, Row, Col } from 'react-bootstrap';
 import Title from '../Title/Title';
-import AboutImg from '../Image/AboutImg';
+// import AboutImg from '../Image/AboutImg';
 import { DateTime, Interval } from 'luxon';
 
 const About: React.FC = () => {

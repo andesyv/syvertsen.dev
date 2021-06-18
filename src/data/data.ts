@@ -16,7 +16,7 @@ export interface IProjectData {
 export const projectsData: IProjectData[] = [
   {
     id: nanoid(),
-    img: 'projects/BigButlerBattle.png',
+    img: 'BigButlerBattle.png',
     title: 'Big Butler Battle',
     info: [
       'A local splitscreen multiplayer game about skating around a castle as a butler.',
@@ -27,7 +27,7 @@ export const projectsData: IProjectData[] = [
   },
   {
     id: nanoid(),
-    img: 'projects/ChristmasWebGL.gif',
+    img: 'ChristmasWebGL.gif',
     title: 'Christmas WebGL',
     info: ['A small christmassy themed rendering made with WebGL 2.0'],
     link: { url: 'https://andesyv.github.io/ChristmasWebGL/' },
@@ -55,7 +55,7 @@ export const projectsData: IProjectData[] = [
   },
   {
     id: nanoid(),
-    img: 'projects/RaytracingWebGL.gif',
+    img: 'RaytracingWebGL.gif',
     title: 'Raytracting WebGL',
     info: ['Some very basic raytracing in WebGL'],
     link: { url: 'https://andesyv.github.io/RaytracingWebGL/' },

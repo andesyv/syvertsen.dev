@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
-import Tilt from 'react-tilt';
 import { Container, Row, Col } from 'react-bootstrap';
 import PortfolioContext from '../../context/context';
 import Title from '../Title/Title';
@@ -24,8 +23,7 @@ const Projects: React.FC = () => {
       <Container>
         <div className="project-wrapper">
           <Title title="Projects" />
-          {projects.map((project) => {
-            const { title, info, link, repo, img, id } = project;
+          {projects.map(({ title, info, link, repo, img, id }) => {
             const twoColumns: boolean = img != undefined;
 
             return (
@@ -89,23 +87,7 @@ const Projects: React.FC = () => {
                           rel="noopener noreferrer"
                           {...(link ? { href: link.url } : {})}
                         >
-                          <Tilt
-                            options={{
-                              reverse: false,
-                              max: 8,
-                              perspective: 1000,
-                              scale: 1,
-                              speed: 300,
-                              transition: true,
-                              axis: null,
-                              reset: true,
-                              easing: 'cubic-bezier(.03,.98,.52,.99)',
-                            }}
-                          >
-                            {/* <div data-tilt className="thumbnail rounded">
-                              <ProjectImg alt={title} filename={img as string} />
-                            </div> */}
-                          </Tilt>
+                          <ProjectImg alt={title} filename={img as string} />
                         </a>
                       </div>
                     </Fade>
