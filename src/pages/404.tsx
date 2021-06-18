@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import { Helmet } from 'react-helmet';
 import { Container } from 'react-bootstrap';
 import Fade from 'react-reveal/Fade';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import '../style/main.scss';
 
 export default () => {
   return (
@@ -28,8 +26,11 @@ export default () => {
           </Fade>
           <Fade bottom duration={1000} delay={1000} distance="30px">
             <p className="hero-cta justify-content-center">
-              <Link className="cta-btn cta-btn--hero" to="/">
+              {/* <Link className="cta-btn cta-btn--hero" to="/">
                 Go back
+              </Link> */}
+              <Link href="/">
+                <a>Go back</a>
               </Link>
             </p>
           </Fade>

@@ -102,9 +102,9 @@ const Projects: React.FC = () => {
                               easing: 'cubic-bezier(.03,.98,.52,.99)',
                             }}
                           >
-                            <div data-tilt className="thumbnail rounded">
+                            {/* <div data-tilt className="thumbnail rounded">
                               <ProjectImg alt={title} filename={img as string} />
-                            </div>
+                            </div> */}
                           </Tilt>
                         </a>
                       </div>
