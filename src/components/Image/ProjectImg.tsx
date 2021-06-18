@@ -26,7 +26,7 @@ class StaticImage extends React.PureComponent<Props, ImageState> {
 
       const w = maxWidth;
       // w / width = h / height
-      // height * w / width = h 
+      // height * w / width = h
       const h = (img.naturalHeight * w) / img.naturalWidth;
 
       this.setState({ width: w, height: h });

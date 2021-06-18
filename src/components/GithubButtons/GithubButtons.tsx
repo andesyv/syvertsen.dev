@@ -2,10 +2,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { GitHubButtonProps } from 'github-buttons';
 
-const DynamicGithubButton = dynamic(
-  () => import('react-github-btn'),
-  { ssr: false }
-);
+const DynamicGithubButton = dynamic(() => import('react-github-btn'), { ssr: false });
 
 const capitalizeFirst = (str: string): string => {
   return str.charAt(0).toUpperCase() + str.slice(1);

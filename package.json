@@ -8,13 +8,14 @@
     "build": "next build",
     "develop": "next dev",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop"
+    "start": "next start"
   },
   "dependencies": {
     "@react-hook/window-size": "^3.0.7",
     "@types/luxon": "^1.27.0",
     "@types/react": "^17.0.11",
     "@types/react-bootstrap": "^0.32.25",
+    "@types/react-helmet": "^6.1.1",
     "@types/react-scroll": "^1.8.2",
     "bootstrap": "^5.0.1",
     "github-buttons": "^2.18.1",
@@ -41,6 +42,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.28.0",
     "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-next": "^11.0.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.3.1",
