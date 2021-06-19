@@ -43,6 +43,12 @@ const About: React.FC = () => {
                   Interval.fromDateTimes(birthday, DateTime.local()).length('years')
                 )} years of age, I am currently taking a masters degree in informatics specialized in visualization. I also have a bachelors degree in games and games technology.`}
               </p>
+              <p className="about-wrapper__info-text">
+                {'Contact me about anything at '}
+                <span className="about-wrapper__info-text-code">
+                  {'<topic or whatever>@syvertsen.dev'}
+                </span>
+              </p>
               {/* resume && (
                   <span className="d-flex mt-3">
                     <a
