@@ -15,7 +15,22 @@ import Footer from '../components/Footer';
 import { PortfolioProvider } from '../context/context';
 import { projectsData, footerData, IData } from '../data/data';
 
-const Body: React.FC<IData> = (props) => {
+const AppHead: React.FC = () => {
+  return (
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>Syvertsen.dev</title>
+      <html lang="en" />
+      <meta name="description" content={'Syvertsen.dev'} />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <link rel="manifest" href="/site.webmanifest" />
+    </Helmet>
+  );
+};
+
+const AppBody: React.FC<IData> = (props) => {
   const [width, height] = useWindowSize();
 
   const isBirthday = useCallback(() => {
@@ -38,13 +53,8 @@ const Body: React.FC<IData> = (props) => {
 const App: React.FC<IData> = (props) => {
   return (
     <>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>{'Syvertsen.dev'}</title>
-        <html lang="en" />
-        <meta name="description" content={'Syvertsen.dev'} />
-      </Helmet>
-      <Body {...props} />
+      <AppHead />
+      <AppBody {...props} />
     </>
   );
 };
