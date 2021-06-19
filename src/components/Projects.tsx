@@ -4,7 +4,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import PortfolioContext from '../context/context';
 import Title from './Title';
 import ProjectImg from './ProjectImg';
-import { ExtendedImageData } from '../data/data';
 
 const Projects: React.FC = () => {
   const projects = useContext(PortfolioContext).projects;

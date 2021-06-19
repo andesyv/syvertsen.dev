@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Tilt from 'react-tilt';
 import { ExtendedImageData } from '../data/data';
-
-import styles from '../style/modules/projects.module.scss';
-
 interface Props {
   img: ExtendedImageData;
   alt: string;
