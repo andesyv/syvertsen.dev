@@ -13,7 +13,7 @@ import Footer from '../components/Footer';
 
 // Data:
 import { PortfolioProvider } from '../context/context';
-import { projectsData, footerData, IData } from '../data/data';
+import { projectsData, footerData, IDataExtended, populateImageData } from '../data/data';
 
 const AppHead: React.FC = () => {
   return (
@@ -30,7 +30,7 @@ const AppHead: React.FC = () => {
   );
 };
 
-const AppBody: React.FC<IData> = (props) => {
+const AppBody: React.FC<IDataExtended> = (props) => {
   const [width, height] = useWindowSize();
 
   const isBirthday = useCallback(() => {
@@ -50,7 +50,7 @@ const AppBody: React.FC<IData> = (props) => {
   );
 };
 
-const App: React.FC<IData> = (props) => {
+const App: React.FC<IDataExtended> = (props) => {
   return (
     <>
       <AppHead />
@@ -63,6 +63,6 @@ export default App;
 
 export const getStaticProps: GetStaticProps = () => {
   return {
-    props: { projects: projectsData, footer: footerData },
+    props: { projects: populateImageData(projectsData), footer: footerData },
   };
 };

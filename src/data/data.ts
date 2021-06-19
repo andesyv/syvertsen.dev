@@ -1,8 +1,9 @@
 import { nanoid } from 'nanoid';
+import sizeOf from 'image-size';
 
-export interface IProjectData {
+export interface IProjectData<I = string> {
   id: string;
-  img?: string;
+  img?: I;
   title: string;
   info: string[];
   link?: {
@@ -48,8 +49,7 @@ export const projectsData: IProjectData[] = [
     info: ['A small Discord bot I made for fun with a few friends.'],
     link: {
       text: 'Add bot to server?',
-      url:
-        'https://discord.com/oauth2/authorize?&client_id=492017860068114444&scope=bot&permissions=201427968',
+      url: 'https://discord.com/oauth2/authorize?&client_id=492017860068114444&scope=bot&permissions=201427968',
     },
     repo: 'https://github.com/andesyv/ThonkBot',
   },
@@ -97,14 +97,40 @@ export const footerData = {
     {
       id: nanoid(),
       name: 'envelope',
-      url: 'mailto:anders@💻.kz'
+      url: 'mailto:anders@💻.kz',
     },
   ],
 };
 
-export interface IData {
-  projects: IProjectData[];
+export interface IData<I = string> {
+  projects: IProjectData<I>[];
   footer: {
     networks: IFooterData[];
   };
 }
+export interface ExtendedImageData {
+  filename: string;
+  width: number;
+  height: number;
+}
+
+export type IProjectDataExtended = IProjectData<ExtendedImageData>;
+export type IDataExtended = IData<ExtendedImageData>;
+
+export const populateImageData = (data: IProjectData[]): IProjectDataExtended[] => {
+  return data.map((d): IProjectDataExtended => {
+    const de = d as unknown as IProjectDataExtended;
+    if (d.img !== undefined) {
+      const dims = sizeOf(`${process.cwd()}/public/projects/${d.img}`);
+      de.img =
+        dims.width !== undefined && dims.height !== undefined
+          ? {
+              filename: d.img,
+              width: dims.width,
+              height: dims.height,
+            }
+          : undefined;
+    }
+    return de;
+  });
+};

@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import PortfolioContext from '../context/context';
 import Title from './Title';
 import ProjectImg from './ProjectImg';
+import { ExtendedImageData } from '../data/data';
 
 const Projects: React.FC = () => {
   const projects = useContext(PortfolioContext).projects;
@@ -87,7 +88,7 @@ const Projects: React.FC = () => {
                           rel="noopener noreferrer"
                           {...(link ? { href: link.url } : {})}
                         >
-                          <ProjectImg alt={title} filename={img as string} />
+                          {img !== undefined && <ProjectImg alt={title} img={img} />}
                         </a>
                       </div>
                     </Fade>

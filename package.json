@@ -19,6 +19,7 @@
     "@types/react-scroll": "^1.8.2",
     "bootstrap": "^5.0.1",
     "github-buttons": "^2.18.1",
+    "image-size": "^1.0.0",
     "luxon": "^1.27.0",
     "nanoid": "^3.1.10",
     "next": "^11.0.0",

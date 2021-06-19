@@ -1,7 +1,7 @@
 import React from 'react';
-import { IData } from '../data/data';
+import { IDataExtended } from '../data/data';
 
-const PortfolioContext = React.createContext<IData>({} as any); // Undefined default value
+const PortfolioContext = React.createContext<IDataExtended>({} as any); // Undefined default value
 
 export const PortfolioProvider = PortfolioContext.Provider;
 export const PortfolioConsumer = PortfolioContext.Consumer;
