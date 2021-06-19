@@ -6,12 +6,14 @@ import GithubButtons from './GithubButtons';
 
 import { IFooterData } from '../data/data';
 
+import styles from '../style/modules/footer.module.scss';
+
 const Footer: React.FC = () => {
   const { footer } = useContext(PortfolioContext);
   const networks = footer.networks;
 
   return (
-    <footer className="footer navbar-static-bottom">
+    <footer className={`${styles.footer} navbar-static-bottom`}>
       <Container>
         <span className="back-to-top">
           <Link to="hero" smooth duration={1000}>
@@ -35,7 +37,7 @@ const Footer: React.FC = () => {
               );
             })}
         </div>
-        <hr />
+        <hr className={styles.footer} />
         <p className="footer__text">© {new Date().getFullYear()} Anders Syvertsen</p>
         <GithubButtons repo="andesyv/syvertsen.dev" type="star" />
         <GithubButtons repo="andesyv/syvertsen.dev" type="issue" />
