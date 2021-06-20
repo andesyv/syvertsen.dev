@@ -1,8 +1,8 @@
 # [Syvertsen.dev](https://syvertsen.dev/)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/17825fb0-5c8a-4c5d-8a1e-31dafbe43da5/deploy-status)](https://app.netlify.com/sites/syvertsendev/deploys)
+[![Vercel status](https://img.shields.io/github/deployments/andesyv/syvertsen.dev/production?label=vercel&logo=vercel&logoColor=white)](https://syvertsen-dev.vercel.app/_logs)
 
-This is my personal portfolio webpage, which is made using Gatsby from the template made by [Jacobo Martínez](https://github.com/cobidev). The page is hosted on netlify.
+This is my personal portfolio webpage, which is made using Next.js based on the [Gatsby Simplefolio](https://github.com/cobidev/gatsby-simplefolio) template made by [Jacobo Martínez](https://github.com/cobidev). The page is hosted and deployed by Vercel.
 
 ## Deployment
 
@@ -11,24 +11,23 @@ If you want to set up a working environment in order to test features of the pag
 Clone the repository locally:
 
 ```
-git clone https://github.com/andesyv/syvertsen.dev
+$ git clone https://github.com/andesyv/syvertsen.dev
 ```
 
-If you have installed gatsby-CLI you can then just navigate to the repository and do
+Navigate to folder and use yarn to install required packages:
 
 ```
-gatsby develop
+$ yarn
 ```
 
-If not you'll have to install the npm packages and then run the start script:
-
+Finally you can run the development environment by running the *develop* script (or just use `next dev` directly):
 ```
-npm install
-npm start
+$ yarn run develop
 ```
-
-(`npm start` actually just runs `gatsby develop` in this project so it's just a longer shortcut
-
+You can also optionally build the page using the *build* script (or `next build`):
+```
+$ yarn run build
+```
 ## Licence
 
 The template by [Jacobo Martínez](https://github.com/cobidev) is modified and redistributed under the licence in [LICENCE.md](LICENCE.md). All unchanged parts of the template is licenced under [gatsby-simplefolio-LICENCE.md](gatsby-simplefolio-LICENCE.md).
