@@ -2,17 +2,14 @@ import React from 'react';
 import Image from 'next/image';
 import Tilt from 'react-tilt';
 import { ExtendedImageData } from '../data/data';
+import Container from 'react-bootstrap/Container';
+
 interface Props {
   img: ExtendedImageData;
   alt: string;
 }
 
-interface ImageState {
-  width: number | string;
-  height: number | string;
-}
-
-class StaticImage extends React.PureComponent<Props, ImageState> {
+class StaticImage extends React.PureComponent<Props, React.CSSProperties> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -21,23 +18,22 @@ class StaticImage extends React.PureComponent<Props, ImageState> {
     };
 
     const containerRef = React.createRef<HTMLDivElement>();
+    const maxWidth = 720;
 
     this.componentDidMount = (): void => {
       const cont = containerRef.current;
-      if (cont !== null) {
-        const maxWidth = 720;
+      if (cont === null) return;
 
-        const cw = this.state.width;
-        const w = typeof cw === 'number' ? Math.min(maxWidth, cw) : maxWidth;
-        // w / width = h / height
-        // height * w / width = h
-        const h = (this.props.img.height * w) / this.props.img.width;
+      const cw = cont.offsetWidth;
+      const w = Math.min(maxWidth, cw);
+      // w / width = h / height
+      // height * w / width = h
+      const h = (this.props.img.height * w) / this.props.img.width;
 
-        this.setState({
-          width: w,
-          height: h,
-        });
-      }
+      this.setState({
+        width: w,
+        height: h,
+      });
     };
 
     this.render = () => {
@@ -55,19 +51,16 @@ class StaticImage extends React.PureComponent<Props, ImageState> {
             easing: 'cubic-bezier(.03,.98,.52,.99)',
           }}
         >
-          <div
-            data-tilt
-            className="thumbnail rounded"
-            style={{ width: this.state.width, height: this.state.height }}
-            ref={containerRef}
-          >
-            <Image
-              src={`/projects/${this.props.img.filename}`}
-              alt={this.props.alt}
-              layout={'fill'}
-              objectFit={'fill'}
-            />
-          </div>
+          <Container data-tilt fluid>
+            <div className="thumbnail rounded" ref={containerRef} style={this.state}>
+              <Image
+                src={`/projects/${this.props.img.filename}`}
+                alt={this.props.alt}
+                layout={'fill'}
+                objectFit={'fill'}
+              />
+            </div>
+          </Container>
         </Tilt>
       );
     };
