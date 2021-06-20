@@ -20,14 +20,13 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'prettier/@typescript-eslint',
     'plugin:react/recommended',
-    'prettier/react',
     'plugin:jsx-a11y/recommended',
-    'plugin:prettier/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
+    'plugin:prettier/recommended',
+    'next',
   ],
   rules: {
     // Not needed, see https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/typedef.md#when-not-to-use-it
@@ -39,6 +38,7 @@ module.exports = {
     'react/prop-types': 'off',
     // Might want to reconsider this, see https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-default-export.md
     'import/no-default-export': 'off',
+    'jsx-a11y/anchor-is-valid': 'off',
   },
   settings: {
     node: {

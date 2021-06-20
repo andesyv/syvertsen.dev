@@ -1,8 +1,9 @@
 import { nanoid } from 'nanoid';
+import sizeOf from 'image-size';
 
-export interface IProjectData {
+export interface IProjectData<I = string> {
   id: string;
-  img?: string;
+  img?: I;
   title: string;
   info: string[];
   link?: {
@@ -16,7 +17,7 @@ export interface IProjectData {
 export const projectsData: IProjectData[] = [
   {
     id: nanoid(),
-    img: 'projects/BigButlerBattle.png',
+    img: 'BigButlerBattle.png',
     title: 'Big Butler Battle',
     info: [
       'A local splitscreen multiplayer game about skating around a castle as a butler.',
@@ -27,7 +28,7 @@ export const projectsData: IProjectData[] = [
   },
   {
     id: nanoid(),
-    img: 'projects/ChristmasWebGL.gif',
+    img: 'ChristmasWebGL.gif',
     title: 'Christmas WebGL',
     info: ['A small christmassy themed rendering made with WebGL 2.0'],
     link: { url: 'https://andesyv.github.io/ChristmasWebGL/' },
@@ -48,14 +49,13 @@ export const projectsData: IProjectData[] = [
     info: ['A small Discord bot I made for fun with a few friends.'],
     link: {
       text: 'Add bot to server?',
-      url:
-        'https://discord.com/oauth2/authorize?&client_id=492017860068114444&scope=bot&permissions=201427968',
+      url: 'https://discord.com/oauth2/authorize?&client_id=492017860068114444&scope=bot&permissions=201427968',
     },
     repo: 'https://github.com/andesyv/ThonkBot',
   },
   {
     id: nanoid(),
-    img: 'projects/RaytracingWebGL.gif',
+    img: 'RaytracingWebGL.gif',
     title: 'Raytracting WebGL',
     info: ['Some very basic raytracing in WebGL'],
     link: { url: 'https://andesyv.github.io/RaytracingWebGL/' },
@@ -97,14 +97,40 @@ export const footerData = {
     {
       id: nanoid(),
       name: 'envelope',
-      url: 'mailto:anders@💻.kz'
+      url: 'mailto:anders@💻.kz',
     },
   ],
 };
 
-export interface IData {
-  projects: IProjectData[];
+export interface IData<I = string> {
+  projects: IProjectData<I>[];
   footer: {
     networks: IFooterData[];
   };
 }
+export interface ExtendedImageData {
+  filename: string;
+  width: number;
+  height: number;
+}
+
+export type IProjectDataExtended = IProjectData<ExtendedImageData>;
+export type IDataExtended = IData<ExtendedImageData>;
+
+export const populateImageData = (data: IProjectData[]): IProjectDataExtended[] => {
+  return data.map((d): IProjectDataExtended => {
+    const de = d as unknown as IProjectDataExtended;
+    if (d.img !== undefined) {
+      const dims = sizeOf(`${process.cwd()}/public/projects/${d.img}`);
+      de.img =
+        dims.width !== undefined && dims.height !== undefined
+          ? {
+              filename: d.img,
+              width: dims.width,
+              height: dims.height,
+            }
+          : undefined;
+    }
+    return de;
+  });
+};

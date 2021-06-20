@@ -75,6 +75,12 @@
             font-style: normal;
           }
         }
+
+        &-code {
+          background: darken($primary-color, 2%);
+          font-family: 'Courier New', Courier, monospace;
+          padding: .1em .4em;
+        }
       }
     }
   }
