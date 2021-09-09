@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import PortfolioContext from '../context/context';
 import Title from './Title';
 import ProjectImg from './ProjectImg';
+import { PreviewButton, RepoButton } from './Buttons';
 
 const Projects: React.FC = () => {
   const projects = useContext(PortfolioContext).projects;
@@ -48,26 +49,9 @@ const Projects: React.FC = () => {
                         {/* <p className="mb-4">{info2 || ''}</p> */}
                       </div>
                       {link && (
-                        <a
-                          target="_blank"
-                          aria-label="Project Link"
-                          rel="noopener noreferrer"
-                          className="cta-btn cta-btn--hero"
-                          href={link.url}
-                        >
-                          {link.text || 'See Live'}
-                        </a>
+                        <PreviewButton url={link.url}>{link.text || 'See Live'}</PreviewButton>
                       )}
-                      {repo && (
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="cta-btn text-color-main"
-                          href={repo}
-                        >
-                          Source Code
-                        </a>
-                      )}
+                      {repo && <RepoButton repo={repo} />}
                     </div>
                   </Fade>
                 </Col>

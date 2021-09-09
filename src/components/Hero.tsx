@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Fade } from 'react-awesome-reveal';
-import { Link } from 'react-scroll';
+import { BigButton } from './Buttons';
 
 const Header: React.FC = () => {
   const [isDesktop, setIsDesktop] = useState(false);
@@ -36,13 +36,7 @@ const Header: React.FC = () => {
           delay={1000} /* distance="30px" */
           triggerOnce={true}
         >
-          <p className="hero-cta">
-            <span className="cta-btn cta-btn--hero">
-              <Link to="about" smooth={true} duration={1000}>
-                {'Learn more'}
-              </Link>
-            </span>
-          </p>
+          <BigButton to="about">Learn more</BigButton>
         </Fade>
       </Container>
     </section>
