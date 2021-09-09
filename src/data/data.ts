@@ -1,5 +1,8 @@
 import { nanoid } from 'nanoid';
 import sizeOf from 'image-size';
+import { isHttpsUri, isWebUri } from 'valid-url';
+import http from 'http';
+import https from 'https';
 
 export interface IProjectData<I = string> {
   id: string;
@@ -28,20 +31,20 @@ export const projectsData: IProjectData[] = [
   },
   {
     id: nanoid(),
-    img: 'ChristmasWebGL.gif',
-    title: 'Christmas WebGL',
-    info: ['A small christmassy themed rendering made with WebGL 2.0'],
-    link: { url: 'https://andesyv.github.io/ChristmasWebGL/' },
-    repo: 'https://github.com/andesyv/ChristmasWebGL', // if no repo, the button will not show up
-  },
-  {
-    id: nanoid(),
     title: 'Game Engine (ECSMTGE)',
     info: [
       'A small game engine making use of the data oriented design pattern Entity Component System, which also features a JavaScript live-scripting engine.',
       'Made by me and another programmer as a semester project.',
     ],
     repo: 'https://github.com/andesyv/ECSMTGE',
+  },
+  {
+    id: nanoid(),
+    img: 'ChristmasWebGL.gif',
+    title: 'Christmas WebGL',
+    info: ['A small christmassy themed rendering made with WebGL 2.0'],
+    link: { url: 'https://andesyv.github.io/ChristmasWebGL/' },
+    repo: 'https://github.com/andesyv/ChristmasWebGL', // if no repo, the button will not show up
   },
   {
     id: nanoid(),
@@ -67,6 +70,13 @@ export const projectsData: IProjectData[] = [
     info: ['A small webtool for generating noisy cubemaps'],
     link: { url: 'https://andesyv.github.io/noise-cubemap-generator/' },
     repo: 'https://github.com/andesyv/noise-cubemap-generator',
+  },
+  {
+    id: nanoid(),
+    img: 'https://raw.githubusercontent.com/andesyv/megatron3000/master/demo.png',
+    title: 'Megatron3000',
+    info: ['A volume renderer for visualization of medical CT scan data.'],
+    repo: 'https://github.com/andesyv/megatron3000',
   },
 ];
 
@@ -117,20 +127,49 @@ export interface ExtendedImageData {
 export type IProjectDataExtended = IProjectData<ExtendedImageData>;
 export type IDataExtended = IData<ExtendedImageData>;
 
-export const populateImageData = (data: IProjectData[]): IProjectDataExtended[] => {
-  return data.map((d): IProjectDataExtended => {
-    const de = d as unknown as IProjectDataExtended;
-    if (d.img !== undefined) {
-      const dims = sizeOf(`${process.cwd()}/public/projects/${d.img}`);
-      de.img =
-        dims.width !== undefined && dims.height !== undefined
-          ? {
-              filename: d.img,
-              width: dims.width,
-              height: dims.height,
-            }
-          : undefined;
-    }
-    return de;
+const getRemoteImageSize = async (uri: string): Promise<any> => {
+  let result = new Promise((resolve, reject) => {
+    const protocol = isHttpsUri(uri) ? https : http;
+    protocol.get(uri, (resp) => {
+      const chunks: Buffer[] = [];
+      resp
+        .on('data', (chunk) => {
+          chunks.push(chunk);
+        })
+        .on('end', () => {
+          const buffer = Buffer.concat(chunks);
+          resolve(sizeOf(buffer));
+        })
+        .on('error', (err) => reject(err));
+    });
   });
+
+  return result;
+};
+
+const getDims = async (path: string): Promise<ExtendedImageData | undefined> => {
+  const uri = isWebUri(path);
+  const dims =
+    uri !== undefined
+      ? await getRemoteImageSize(uri)
+      : sizeOf(`${process.cwd()}/public/projects/${path}`);
+  return dims?.width === undefined || dims?.height === undefined
+    ? undefined
+    : {
+        filename: path,
+        width: dims.width,
+        height: dims.height,
+      };
+};
+
+export const populateImageData = async (data: IProjectData[]): Promise<IProjectDataExtended[]> => {
+  return await Promise.all(
+    data.map(async (d): Promise<IProjectDataExtended> => {
+      const de = d as unknown as IProjectDataExtended;
+      if (d.img !== undefined) {
+        de.img = await getDims(d.img);
+      }
+      return de;
+    })
+  );
 };

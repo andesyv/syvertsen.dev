@@ -59,8 +59,8 @@ const App: React.FC<IDataExtended> = (props) => {
 
 export default App;
 
-export const getStaticProps: GetStaticProps = () => {
+export const getStaticProps: GetStaticProps = async () => {
   return {
-    props: { projects: populateImageData(projectsData), footer: footerData },
+    props: { projects: await populateImageData(projectsData), footer: footerData },
   };
 };

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Tilt from 'react-tilt';
 import { ExtendedImageData } from '../data/data';
 import Container from 'react-bootstrap/Container';
+import { isWebUri } from 'valid-url';
 
 interface Props {
   img: ExtendedImageData;
@@ -19,6 +20,7 @@ class StaticImage extends React.PureComponent<Props, React.CSSProperties> {
 
     const containerRef = React.createRef<HTMLDivElement>();
     const maxWidth = 720;
+    const imageIsUri = isWebUri(this.props.img.filename) !== undefined;
 
     this.componentDidMount = (): void => {
       const cont = containerRef.current;
@@ -54,7 +56,7 @@ class StaticImage extends React.PureComponent<Props, React.CSSProperties> {
           <Container data-tilt fluid>
             <div className="thumbnail rounded" ref={containerRef} style={this.state}>
               <Image
-                src={`/projects/${this.props.img.filename}`}
+                src={imageIsUri ? this.props.img.filename : `/projects/${this.props.img.filename}`}
                 alt={this.props.alt}
                 layout={'fill'}
                 objectFit={'fill'}
