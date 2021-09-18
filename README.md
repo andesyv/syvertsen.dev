@@ -22,11 +22,11 @@ $ yarn
 
 Finally you can run the development environment by running the *develop* script (or just use `next dev` directly):
 ```
-$ yarn run develop
+$ yarn dev
 ```
 You can also optionally build the page using the *build* script (or `next build`):
 ```
-$ yarn run build
+$ yarn build
 ```
 ## Licence
 

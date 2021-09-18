@@ -3,9 +3,10 @@ import sizeOf from 'image-size';
 import { isHttpsUri, isWebUri } from 'valid-url';
 import http from 'http';
 import https from 'https';
+import { ISizeCalculationResult } from 'image-size/dist/types/interface';
+import { object } from 'prop-types';
 
-export interface IProjectData<I = string> {
-  id: string;
+interface IBaseProjectData<I = string> {
   img?: I;
   title: string;
   info: string[];
@@ -16,10 +17,13 @@ export interface IProjectData<I = string> {
   repo: string;
 }
 
+export interface IProjectData<I = string> extends IBaseProjectData<I> {
+  id: string;
+}
+
 // PROJECTS DATA
-export const projectsData: IProjectData[] = [
+const baseProjectsData: IBaseProjectData[] = [
   {
-    id: nanoid(),
     img: 'BigButlerBattle.png',
     title: 'Big Butler Battle',
     info: [
@@ -30,7 +34,12 @@ export const projectsData: IProjectData[] = [
     repo: 'https://github.com/Skau/BigButlerBattle', // if no repo, the button will not show up
   },
   {
-    id: nanoid(),
+    img: 'https://raw.githubusercontent.com/andesyv/megatron3000/master/demo.png',
+    title: 'Megatron3000',
+    info: ['A volume renderer for visualization of medical CT scan data.'],
+    repo: 'https://github.com/andesyv/megatron3000',
+  },
+  {
     title: 'Game Engine (ECSMTGE)',
     info: [
       'A small game engine making use of the data oriented design pattern Entity Component System, which also features a JavaScript live-scripting engine.',
@@ -39,7 +48,6 @@ export const projectsData: IProjectData[] = [
     repo: 'https://github.com/andesyv/ECSMTGE',
   },
   {
-    id: nanoid(),
     img: 'ChristmasWebGL.gif',
     title: 'Christmas WebGL',
     info: ['A small christmassy themed rendering made with WebGL 2.0'],
@@ -47,7 +55,6 @@ export const projectsData: IProjectData[] = [
     repo: 'https://github.com/andesyv/ChristmasWebGL', // if no repo, the button will not show up
   },
   {
-    id: nanoid(),
     title: 'ThonkBot',
     info: ['A small Discord bot I made for fun with a few friends.'],
     link: {
@@ -57,7 +64,6 @@ export const projectsData: IProjectData[] = [
     repo: 'https://github.com/andesyv/ThonkBot',
   },
   {
-    id: nanoid(),
     img: 'RaytracingWebGL.gif',
     title: 'Raytracting WebGL',
     info: ['Some very basic raytracing in WebGL'],
@@ -65,20 +71,25 @@ export const projectsData: IProjectData[] = [
     repo: 'https://github.com/andesyv/RaytracingWebGL',
   },
   {
-    id: nanoid(),
+    img: 'Noise.png',
     title: 'Noise Cubemap Generator',
     info: ['A small webtool for generating noisy cubemaps'],
-    link: { url: 'https://andesyv.github.io/noise-cubemap-generator/' },
+    link: { url: 'https://noise.syvertsen.dev/' },
     repo: 'https://github.com/andesyv/noise-cubemap-generator',
   },
   {
-    id: nanoid(),
-    img: 'https://raw.githubusercontent.com/andesyv/megatron3000/master/demo.png',
-    title: 'Megatron3000',
-    info: ['A volume renderer for visualization of medical CT scan data.'],
-    repo: 'https://github.com/andesyv/megatron3000',
+    img: 'Text.png',
+    title: 'SDF Text visualization',
+    info: ['Web experiment that visualizes text using a surface distance function render'],
+    link: { url: 'https://text.syvertsen.dev/' },
+    repo: 'https://github.com/andesyv/sdf-text',
   },
 ];
+
+export const projectsData: IProjectData[] = baseProjectsData.map((oldObj) => {
+  const newObj = { id: nanoid() } as IProjectData;
+  return Object.assign(newObj, oldObj);
+});
 
 export interface IFooterData {
   id: string;
@@ -127,8 +138,8 @@ export interface ExtendedImageData {
 export type IProjectDataExtended = IProjectData<ExtendedImageData>;
 export type IDataExtended = IData<ExtendedImageData>;
 
-const getRemoteImageSize = async (uri: string): Promise<any> => {
-  let result = new Promise((resolve, reject) => {
+const getRemoteImageSize = async (uri: string): Promise<ISizeCalculationResult> =>
+  new Promise<ISizeCalculationResult>((resolve, reject) => {
     const protocol = isHttpsUri(uri) ? https : http;
     protocol.get(uri, (resp) => {
       const chunks: Buffer[] = [];
@@ -143,9 +154,6 @@ const getRemoteImageSize = async (uri: string): Promise<any> => {
         .on('error', (err) => reject(err));
     });
   });
-
-  return result;
-};
 
 const getDims = async (path: string): Promise<ExtendedImageData | undefined> => {
   const uri = isWebUri(path);
