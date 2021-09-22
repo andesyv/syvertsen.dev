@@ -4,7 +4,6 @@ import { isHttpsUri, isWebUri } from 'valid-url';
 import http from 'http';
 import https from 'https';
 import { ISizeCalculationResult } from 'image-size/dist/types/interface';
-import { object } from 'prop-types';
 
 interface IBaseProjectData<I = string> {
   img?: I;
