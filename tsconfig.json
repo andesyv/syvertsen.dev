@@ -25,8 +25,11 @@
     "allowJs": true,
     "skipLibCheck": true,
     "plugins": [
-      { "name": "typescript-plugin-css-modules" }
-    ]
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
+    "incremental": true
   },
   "exclude": [
     "node_modules"
