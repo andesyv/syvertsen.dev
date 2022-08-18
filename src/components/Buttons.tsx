@@ -1,5 +1,4 @@
 import { Link } from 'react-scroll';
-
 import styles from '../style/modules/buttons.module.scss';
 
 interface BigButtonProps {
@@ -33,7 +32,7 @@ export const PreviewButton: React.FC<PreviewButtonProps> = (props) => (
     className={`${styles.cta_btn} ${styles.cta_btn__hero}`}
     href={props.url}
   >
-    {props.text || 'See Live'}
+    {props.text ?? 'See Live'}
   </a>
 );
 

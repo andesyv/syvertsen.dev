@@ -47,11 +47,11 @@ const baseProjectsData: IBaseProjectData[] = [
     repo: 'https://github.com/andesyv/ECSMTGE',
   },
   {
-    img: 'ChristmasWebGL.gif',
-    title: 'Christmas WebGL',
-    info: ['A small christmassy themed rendering made with WebGL 2.0'],
-    link: { url: 'https://andesyv.github.io/ChristmasWebGL/' },
-    repo: 'https://github.com/andesyv/ChristmasWebGL', // if no repo, the button will not show up
+    img: 'RaytracingWebGL.gif',
+    title: 'Raytracting WebGL',
+    info: ['Some very basic raytracing in WebGL'],
+    link: { url: 'https://andesyv.github.io/RaytracingWebGL/' },
+    repo: 'https://github.com/andesyv/RaytracingWebGL',
   },
   {
     title: 'ThonkBot',
@@ -63,11 +63,11 @@ const baseProjectsData: IBaseProjectData[] = [
     repo: 'https://github.com/andesyv/ThonkBot',
   },
   {
-    img: 'RaytracingWebGL.gif',
-    title: 'Raytracting WebGL',
-    info: ['Some very basic raytracing in WebGL'],
-    link: { url: 'https://andesyv.github.io/RaytracingWebGL/' },
-    repo: 'https://github.com/andesyv/RaytracingWebGL',
+    img: 'ChristmasWebGL.gif',
+    title: 'Christmas WebGL',
+    info: ['A small christmassy themed rendering made with WebGL 2.0'],
+    link: { url: 'https://andesyv.github.io/ChristmasWebGL/' },
+    repo: 'https://github.com/andesyv/ChristmasWebGL', // if no repo, the button will not show up
   },
   {
     img: 'Noise.png',
@@ -82,6 +82,17 @@ const baseProjectsData: IBaseProjectData[] = [
     info: ['Web experiment that visualizes text using a surface distance function render'],
     link: { url: 'https://text.syvertsen.dev/' },
     repo: 'https://github.com/andesyv/sdf-text',
+  },
+  {
+    title: 'Tangible Scalar Fields',
+    info: [
+      'My master thesis project where I made physical visualizations of scalar data using 3D-printing and a haptic force device.',
+    ],
+    link: {
+      text: 'Read thesis',
+      url: 'https://hdl.handle.net/11250/3004277',
+    },
+    repo: 'https://github.com/andesyv/tangible-scalar-fields',
   },
 ];
 

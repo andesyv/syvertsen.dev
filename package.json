@@ -13,7 +13,7 @@
   "dependencies": {
     "@react-hook/window-size": "^3.0.7",
     "@types/luxon": "^2.0.9",
-    "@types/react": "^17.0.39",
+    "@types/react": "^18.0.17",
     "@types/react-bootstrap": "^0.32.29",
     "@types/react-helmet": "^6.1.5",
     "@types/react-scroll": "^1.8.3",

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { Container, Row } from 'react-bootstrap';
 import Title from './Title';
-// import AboutImg from '../Image/AboutImg';
 import { DateTime, Interval } from 'luxon';
 
 const About: React.FC = () => {
@@ -41,7 +40,9 @@ const About: React.FC = () => {
               <p className="about-wrapper__info-text">
                 {`I'm a fullstack developer with a passion for computer graphics and real-time rendering. ${Math.floor(
                   Interval.fromDateTimes(birthday, DateTime.local()).length('years')
-                )} years of age, I am currently taking a masters degree in informatics specialized in visualization. I also have a bachelors degree in games and games technology.`}
+                )} years of age, I am currently a full-time developer at `}
+                <a href="https://graphisoft.com/solutions/ddscad">Graphisoft</a>
+                {`. Recently, I also completed a masters degree in informatics specialized in visualization and I also have a bachelors degree in games and games technology.`}
               </p>
               <p className="about-wrapper__info-text">
                 {'Contact me about anything at '}
