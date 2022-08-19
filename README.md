@@ -14,19 +14,20 @@ Clone the repository locally:
 $ git clone https://github.com/andesyv/syvertsen.dev
 ```
 
-Navigate to folder and use yarn to install required packages:
+Navigate to folder and use npm to install required packages:
 
 ```
-$ yarn
+$ npm install --force
 ```
+(`--force` is required as some packages used are not up to date (react-reveal))
 
 Finally you can run the development environment by running the *develop* script (or just use `next dev` directly):
 ```
-$ yarn dev
+$ npm run dev
 ```
 You can also optionally build the page using the *build* script (or `next build`):
 ```
-$ yarn build
+$ npm run build
 ```
 ## Licence
 
