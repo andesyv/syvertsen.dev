@@ -1,7 +1,7 @@
 import { Link } from 'react-scroll';
 import styles from '../style/modules/buttons.module.scss';
 
-interface BigButtonProps {
+interface BigButtonProps extends React.PropsWithChildren {
   to: string;
 }
 

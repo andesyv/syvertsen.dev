@@ -48,7 +48,7 @@ const Projects: React.FC = () => {
                         ))}
                         {/* <p className="mb-4">{info2 || ''}</p> */}
                       </div>
-                      {link && <PreviewButton url={link.url} text={link.text} />}
+                      {link && <PreviewButton {...link} />}
                       {repo && <RepoButton repo={repo} />}
                     </div>
                   </Fade>

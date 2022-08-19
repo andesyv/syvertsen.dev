@@ -1,9 +1,8 @@
 import { nanoid } from 'nanoid';
 import sizeOf from 'image-size';
-import { isHttpsUri, isWebUri } from 'valid-url';
-import http from 'http';
-import https from 'https';
-import { ISizeCalculationResult } from 'image-size/dist/types/interface';
+import { isWebUri } from 'valid-url';
+import { buffer as getBuffer } from 'get-stream';
+import { get } from 'request';
 
 interface IBaseProjectData<I = string> {
   img?: I;
@@ -16,12 +15,13 @@ interface IBaseProjectData<I = string> {
   repo: string;
 }
 
-export interface IProjectData<I = string> extends IBaseProjectData<I> {
-  id: string;
+export interface IBaseNetworkData {
+  name: string;
+  url: string;
 }
 
 // PROJECTS DATA
-const baseProjectsData: IBaseProjectData[] = [
+const projects: IBaseProjectData[] = [
   {
     img: 'BigButlerBattle.png',
     title: 'Big Butler Battle',
@@ -96,49 +96,42 @@ const baseProjectsData: IBaseProjectData[] = [
   },
 ];
 
-export const projectsData: IProjectData[] = baseProjectsData.map((oldObj) => {
-  const newObj = { id: nanoid() } as IProjectData;
-  return Object.assign(newObj, oldObj);
-});
-
-export interface IFooterData {
-  id: string;
-  name: string;
-  url: string;
-}
-
 // FOOTER DATA
-export const footerData = {
-  networks: [
-    // {
-    //   id: nanoid(),
-    //   name: 'twitter',
-    //   url: '',
-    // },
-    {
-      id: nanoid(),
-      name: 'linkedin',
-      url: 'https://www.linkedin.com/in/anders-syvertsen/',
-    },
-    {
-      id: nanoid(),
-      name: 'github',
-      url: 'https://github.com/andesyv',
-    },
-    {
-      id: nanoid(),
-      name: 'envelope',
-      url: 'mailto:anders@💻.kz',
-    },
-  ],
-};
+const networks: IBaseNetworkData[] = [
+  {
+    name: 'linkedin',
+    url: 'https://www.linkedin.com/in/anders-syvertsen/',
+  },
+  {
+    name: 'github',
+    url: 'https://github.com/andesyv',
+  },
+  {
+    name: 'envelope',
+    url: 'mailto:anders@💻.kz',
+  },
+];
+
+type IDataWithId<T> = {
+  id: string;
+} & T;
+
+const AttachIds = <Type>(arr: Type[]): IDataWithId<Type>[] =>
+  arr.map((oldObj) => ({ id: nanoid(), ...oldObj }));
+
+export type IProjectData<I = string> = IDataWithId<IBaseProjectData<I>>;
+export type INetworkData = IDataWithId<IBaseNetworkData>;
+
+export const projectsData = AttachIds(projects);
+export const footerData = AttachIds(networks);
 
 export interface IData<I = string> {
   projects: IProjectData<I>[];
   footer: {
-    networks: IFooterData[];
+    networks: INetworkData[];
   };
 }
+
 export interface ExtendedImageData {
   filename: string;
   width: number;
@@ -148,22 +141,7 @@ export interface ExtendedImageData {
 export type IProjectDataExtended = IProjectData<ExtendedImageData>;
 export type IDataExtended = IData<ExtendedImageData>;
 
-const getRemoteImageSize = async (uri: string): Promise<ISizeCalculationResult> =>
-  new Promise<ISizeCalculationResult>((resolve, reject) => {
-    const protocol = isHttpsUri(uri) ? https : http;
-    protocol.get(uri, (resp) => {
-      const chunks: Buffer[] = [];
-      resp
-        .on('data', (chunk) => {
-          chunks.push(chunk);
-        })
-        .on('end', () => {
-          const buffer = Buffer.concat(chunks);
-          resolve(sizeOf(buffer));
-        })
-        .on('error', (err) => reject(err));
-    });
-  });
+const getRemoteImageSize = async (uri: string) => sizeOf(await getBuffer(get(uri)));
 
 const getDims = async (path: string): Promise<ExtendedImageData | undefined> => {
   const uri = isWebUri(path);

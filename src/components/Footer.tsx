@@ -4,8 +4,6 @@ import { Link } from 'react-scroll';
 import PortfolioContext from '../context/context';
 import GithubButtons from './GithubButtons';
 
-import { IFooterData } from '../data/data';
-
 import styles from '../style/modules/footer.module.scss';
 
 const Footer: React.FC = () => {
@@ -22,8 +20,7 @@ const Footer: React.FC = () => {
         </span>
         <div className="social-links">
           {networks &&
-            networks.map((network: IFooterData) => {
-              const { id, name, url } = network;
+            networks.map(({ id, name, url }) => {
               return (
                 <a
                   key={id}

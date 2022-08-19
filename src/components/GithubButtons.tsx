@@ -8,7 +8,7 @@ const capitalizeFirst = (str: string): string => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-interface Props {
+interface Props extends React.PropsWithChildren {
   repo: string;
   type: 'fork' | 'star' | 'issue';
   label?: string;
@@ -41,7 +41,7 @@ const GithubButton: React.FC<Props> = (props) => {
   return (
     <>
       <DynamicGithubButton {...args}>
-        {props.children || props.label || capitalizeFirst(props.type)}
+        {props.children ?? props.label ?? capitalizeFirst(props.type)}
       </DynamicGithubButton>
     </>
   );
