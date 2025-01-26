@@ -2,11 +2,22 @@ import Link from "next/link";
 import { ThemeSwitch } from "./theme-switch";
 import { metaData } from "../config";
 
-const navItems = {
-  "/blog": { name: "Blog" },
-  "/projects": { name: "Projects" },
-  "/photos": { name: "Photos" },
-};
+interface NavItem {
+  path: string,
+  name: string,
+}
+
+const navItems: NavItem[] = [
+  {
+    path: "/projects",
+    name: "Projects",
+  },
+// Blog is disabled until I make some content :)
+//  {
+//    path: "/blog",
+//    name: "Blog",
+//  },
+];
 
 export function Navbar() {
   return (
@@ -18,7 +29,7 @@ export function Navbar() {
           </Link>
         </div>
         <div className="flex flex-row gap-4 mt-6 md:mt-0 md:ml-auto items-center">
-          {Object.entries(navItems).map(([path, { name }]) => (
+          {navItems.map(({ path, name }) => (
             <Link
               key={path}
               href={path}

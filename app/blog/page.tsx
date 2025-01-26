@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { formatDate, getBlogPosts } from "app/lib/posts";
 
+// Note to self: If I ever want RSS feeds, look at https://github.com/1msirius/Nextfolio/tree/main/app/feed for how to
+
 export const metadata = {
   title: "Blog",
   description: "Nextfolio Blog",

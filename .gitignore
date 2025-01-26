@@ -4,5 +4,6 @@ node_modules/
 # next.js stuff
 .next
 
-# VS Code stuff
+# IDE stuff
 .vscode
+.fleet
