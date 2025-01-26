@@ -2,7 +2,7 @@
 
 [![Vercel status](https://img.shields.io/github/deployments/andesyv/syvertsen.dev/production?label=vercel&logo=vercel&logoColor=white)](https://syvertsen-dev.vercel.app/_logs)
 
-This is my personal portfolio webpage, which is made using Next.js based on the [Gatsby Simplefolio](https://github.com/cobidev/gatsby-simplefolio) template made by [Jacobo Martínez](https://github.com/cobidev). The page is hosted and deployed by Vercel.
+This is my personal portfolio webpage, which is made using Next.js based on the [Nextfolio](https://github.com/1msirius/Nextfolio) template. The page is hosted and deployed by Vercel.
 
 ## Deployment
 
@@ -31,4 +31,4 @@ $ npm run build
 ```
 ## Licence
 
-The template by [Jacobo Martínez](https://github.com/cobidev) is modified and redistributed under the licence in [LICENCE.md](LICENCE.md). All unchanged parts of the template is licenced under [gatsby-simplefolio-LICENCE.md](gatsby-simplefolio-LICENCE.md).
+[LICENCE.md](LICENCE.md)

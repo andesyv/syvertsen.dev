@@ -1,1 +1,1 @@
-Copyright (c) 2021 Anders Syvertsen
+Copyright (c) 2025 Anders Syvertsen
