@@ -14,21 +14,21 @@ Clone the repository locally:
 $ git clone https://github.com/andesyv/syvertsen.dev
 ```
 
-Navigate to folder and use npm to install required packages:
+Navigate to folder and use deno to install dependencies:
 
 ```
-$ npm install --force
+$ deno install
 ```
-(`--force` is required as some packages used are not up to date (react-reveal))
-
 Finally you can run the development environment by running the *develop* script (or just use `next dev` directly):
 ```
-$ npm run dev
+$ deno run dev
 ```
-You can also optionally build the page using the *build* script (or `next build`):
-```
-$ npm run build
-```
-## Licence
+## TODOs
+ - Copy over old images / icons
+ - Fix up the messy typings around the template project
+ - Complete project descriptions
+ - Make an inline code block for showing email on front page
+ - Fix deno deployment if necessary (https://vercel.com/docs/functions/runtimes)
 
+## Licence
 [LICENCE.md](LICENCE.md)

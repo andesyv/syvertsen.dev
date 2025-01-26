@@ -41,6 +41,8 @@ export const metadata: Metadata = {
   },
 };
 
+// TODO: Birthday confetti
+
 const cx = (...classes) => classes.filter(Boolean).join(" ");
 
 export default function RootLayout({
