@@ -1,11 +1,17 @@
-import React from "react";
-import type { Metadata } from "next";
-import { projects } from "./project-data";
+import React from 'react';
+import type { Metadata } from 'next';
+import { Project, projects } from './project-data';
 
 export const metadata: Metadata = {
-  title: "Projects",
-  description: "My Projects",
+  title: 'Projects',
+  description: 'My Projects',
 };
+
+const getMainProjectUrl = (project: Project): string =>
+  project.demo?.url ?? project.sourceUrl;
+
+// TODO: Fix images
+// TODO: Some of the project descriptions should have an optional url displayed in a custom link (i.e. ThonkBot)
 
 export default function Projects() {
   return (
@@ -15,7 +21,7 @@ export default function Projects() {
         {projects.map((project, index) => (
           <a
             key={index}
-            href={project.url}
+            href={getMainProjectUrl(project)}
             target="_blank"
             rel="noopener noreferrer"
             className="block group hover:opacity-80 transition-opacity duration-200"
@@ -25,13 +31,18 @@ export default function Projects() {
                 <span className="text-black dark:text-white font-medium tracking-tight">
                   {project.title}
                 </span>
-                <span className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm">
-                  {project.year}
-                </span>
+                {/*<span className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm">*/}
+                {/*  {project.year}*/}
+                {/*</span>*/}
               </div>
-              <p className="prose prose-neutral dark:prose-invert pt-3">
-                {project.description}
-              </p>
+              {project.descriptions.map((description, index) => (
+                <p
+                  key={index}
+                  className="prose prose-neutral dark:prose-invert pt-3"
+                >
+                  {description}
+                </p>
+              ))}
             </div>
           </a>
         ))}
