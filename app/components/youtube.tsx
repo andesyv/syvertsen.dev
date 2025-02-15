@@ -1,7 +1,7 @@
-"use client";
-import YT from "react-youtube";
+'use client';
+import YT, { YouTubeProps } from 'react-youtube';
 
-export function YouTubeComponent(props: any) {
+export function YouTubeComponent(props: YouTubeProps) {
   return (
     <div className="relative w-full h-0 pb-[56.25%] my-6">
       <YT

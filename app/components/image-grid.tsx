@@ -1,5 +1,5 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 interface ImageGridProps {
   images: {
@@ -11,13 +11,13 @@ interface ImageGridProps {
 }
 
 export const ImageGrid: React.FC<ImageGridProps> = ({
-  images,
-  columns = 3,
-}) => {
+                                                      images,
+                                                      columns = 3,
+                                                    }) => {
   const gridClass = {
-    2: "grid-cols-2 sm:grid-cols-2",
-    3: "grid-cols-2 sm:grid-cols-3",
-    4: "grid-cols-2 sm:grid-cols-4",
+    2: 'grid-cols-2 sm:grid-cols-2',
+    3: 'grid-cols-2 sm:grid-cols-3',
+    4: 'grid-cols-2 sm:grid-cols-4',
   }[columns];
 
   return (

@@ -1,0 +1,5 @@
+{
+    // According to https://github.com/denoland/deno/issues/26584, Next.js is bundled together with a package
+    // that uses this unsafe __proto__ property. So we need to enable it to use Next.js
+    "unstable": ["unsafe-proto"]
+}

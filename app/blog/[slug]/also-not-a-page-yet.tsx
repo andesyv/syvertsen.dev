@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { CustomMDX } from "app/components/mdx";
-import { formatDate, getBlogPosts } from "app/lib/posts";
-import { metaData } from "app/config";
+// deno-lint-ignore-file
+
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { CustomMDX } from 'app/components/mdx';
+import { formatDate, getBlogPosts } from 'app/lib/posts';
+import { metaData } from 'app/config';
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -13,8 +15,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params,
-}): Promise<Metadata | undefined> {
+                                         params,
+                                       }): Promise<Metadata | undefined> {
   let post = getBlogPosts().find((post) => post.slug === params.slug);
   if (!post) {
     return;
@@ -36,7 +38,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      type: "article",
+      type: 'article',
       publishedTime,
       url: `${metaData.baseUrl}/blog/${post.slug}`,
       images: [
@@ -46,7 +48,7 @@ export async function generateMetadata({
       ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title,
       description,
       images: [ogImage],
@@ -54,7 +56,7 @@ export async function generateMetadata({
   };
 }
 
-export default function Blog({ params }) {
+export /*default*/ function Blog({ params }) {
   let post = getBlogPosts().find((post) => post.slug === params.slug);
 
   if (!post) {
@@ -68,8 +70,8 @@ export default function Blog({ params }) {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
             headline: post.metadata.title,
             datePublished: post.metadata.publishedAt,
             dateModified: post.metadata.publishedAt,
@@ -79,7 +81,7 @@ export default function Blog({ params }) {
               : `/og?title=${encodeURIComponent(post.metadata.title)}`,
             url: `${metaData.baseUrl}/blog/${post.slug}`,
             author: {
-              "@type": "Person",
+              '@type': 'Person',
               name: metaData.name,
             },
           }),

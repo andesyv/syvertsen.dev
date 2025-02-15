@@ -1,15 +1,22 @@
-import Link from "next/link";
-import { formatDate, getBlogPosts } from "app/lib/posts";
+// deno-lint-ignore-file
+
+// Note: The wacky name is due to Next.js being extremely reliant on a specific file structure. Every file named "page",
+// WILL be included in the Next.js build and counted as a page. And there's no way to prevent this nor a plan to
+// implement this functionality.
+// Yes, Next.js 15 is a real mess (14 and lower are cool).
+
+import Link from 'next/link';
+import { formatDate, getBlogPosts } from 'app/lib/posts';
 
 // Note to self: If I ever want RSS feeds, look at https://github.com/1msirius/Nextfolio/tree/main/app/feed for how to
 
 export const metadata = {
-  title: "Blog",
-  description: "Nextfolio Blog",
+  title: 'Blog',
+  description: 'Nextfolio Blog',
 };
 
 export default function BlogPosts() {
-  let allBlogs = getBlogPosts();
+  const allBlogs = getBlogPosts();
 
   return (
     <section>
@@ -31,7 +38,8 @@ export default function BlogPosts() {
               className="flex flex-col space-y-1 mb-4 transition-opacity duration-200 hover:opacity-80"
               href={`/blog/${post.slug}`}
             >
-              <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
+              <div
+                className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
                 <p className="text-black dark:text-white tracking-tight">
                   {post.metadata.title}
                 </p>

@@ -20,7 +20,7 @@ export function assertIsImageData(value: object): asserts value is ImageData {
   if (!instanceOfImageData(value)) throw new Error('Not ExtendedImageData');
 }
 
-const isGif = (url: string) => url.slice(url.length - 4) === '.gif'
+const isGif = (url: string) => url.slice(url.length - 4) === '.gif';
 
 //class StaticImage extends React.PureComponent<ImageData, React.CSSProperties> {
 //  constructor(props: ImageData) {
@@ -88,7 +88,7 @@ const isGif = (url: string) => url.slice(url.length - 4) === '.gif'
 
 export default function ProjectImg(props: ImageData) {
 //  assertIsImageData(props);
-  console.log("Rendering %o", props);
+  console.log('Rendering %o', props);
   const imageIsUrl = isWebUri(props.uri) !== undefined;
   return (
     <Image
@@ -96,11 +96,11 @@ export default function ProjectImg(props: ImageData) {
       alt={props.alt}
       width={props.width}
       height={props.height}
-//        style={{
-//            objectFit: 'contain' // 'fill'
-//        }}
-//        layout={'fill'}
-//        objectFit={'fill'}
+      //        style={{
+      //            objectFit: 'contain' // 'fill'
+      //        }}
+      //        layout={'fill'}
+      //        objectFit={'fill'}
       unoptimized={isGif(props.uri)}
     />
   );

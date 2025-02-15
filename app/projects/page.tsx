@@ -1,7 +1,6 @@
-'use server'
+'use server';
 
 import React from 'react';
-import { Metadata } from 'next';
 import { ExtendedProjectData, projects as originalProjects, populateProjectData } from './data';
 import /*ProjectImg,*/ { assertIsImageData } from '../components/projectimg';
 
@@ -17,7 +16,7 @@ interface Props {
 const getMainProjectUrl = (project: ExtendedProjectData): string =>
   project.demo?.url ?? project.sourceUrl;
 
-function MaybeProjectImage(props: ExtendedProjectData) {
+function MaybeProjectImage(_props: ExtendedProjectData) {
 //  if (props.image) {
 //    return (<ProjectImg {...props.image} />);
 //  }
@@ -78,7 +77,8 @@ export default async function Page() {
                 <MaybeProjectImage {...project} />
               </div>
             </a>
-          );})}
+          );
+        })}
       </div>
     </section>
   );

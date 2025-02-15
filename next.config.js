@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: "/rss.xml",
@@ -35,7 +35,7 @@ const nextConfig = {
   },
   images: {
     domains: ['raw.githubusercontent.com'],
-  }
+  },
 };
 
 export default nextConfig;

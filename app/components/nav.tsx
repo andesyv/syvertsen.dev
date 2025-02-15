@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { ThemeSwitch } from "./theme-switch";
-import { metaData } from "../config";
+import Link from 'next/link';
+import { ThemeSwitch } from './theme-switch';
+import { metaData } from '../config';
 
 interface NavItem {
   path: string,
@@ -9,8 +9,8 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
-    path: "/projects",
-    name: "Projects",
+    path: '/projects',
+    name: 'Projects',
   },
 // Blog is disabled until I make some content :)
 //  {
