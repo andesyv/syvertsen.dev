@@ -66,7 +66,7 @@ const isGif = (url: string) => url.slice(url.length - 4) === '.gif'
 ////          }}
 ////        >
 ////          <Container data-tilt fluid>
-//            <div className="thumbnail rounded" ref={containerRef} style={this.state}>
+//            <div className="thumbnail rounded-sm" ref={containerRef} style={this.state}>
 //              <Image
 //                src={imageIsUrl ? this.props.uri : `/projects/${this.props.uri}`}
 //                alt={this.props.alt}
