@@ -1,34 +1,40 @@
-"use client";
-
-import React from "react";
 import { FaGithub } from "react-icons/fa6";
 import { TbMailFilled } from "react-icons/tb";
-import { metaData, socialLinks } from "app/config";
+import Copydate from "./copydate.tsx";
 
-const YEAR = new Date().getFullYear();
-
-function SocialLink({ href, icon: Icon }) {
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
-      <Icon />
-    </a>
-  );
+interface SocialLinksProps {
+  github: string;
+  email: string;
 }
 
-function SocialLinks() {
+function SocialLinks({ github, email }: SocialLinksProps) {
   return (
     <div className="flex text-lg gap-3.5 float-right transition-opacity duration-300 hover:opacity-90">
-      <SocialLink href={socialLinks.github} icon={FaGithub} />
-      <SocialLink href={socialLinks.email} icon={TbMailFilled} />
+      <a target="_blank" rel="noopener noreferrer" href={github}>
+        <FaGithub />
+      </a>
+      <a target="_blank" rel="noopener noreferrer" href={email}>
+        <TbMailFilled />
+      </a>
     </div>
   );
 }
 
-export default function Footer() {
+interface FooterProps {
+  title: string;
+  socialLinks?: {
+    github: string;
+    email: string;
+  };
+}
+
+export default function Footer({ title, socialLinks }: FooterProps) {
   return (
     <small className="block lg:mt-24 mt-16 text-[#1C1C1C] dark:text-[#D4D4D4]">
-      <time>© {YEAR}</time> {metaData.title}
-      <style jsx>
+      <Copydate /> {title}
+      {/* I don't know that this one does... */}
+      {
+        /* <style jsx>
         {`
         @media screen and (max-width: 480px) {
           article {
@@ -37,8 +43,9 @@ export default function Footer() {
           }
         }
       `}
-      </style>
-      <SocialLinks />
+      </style> */
+      }
+      {socialLinks !== undefined && <SocialLinks {...socialLinks} />}
     </small>
   );
 }

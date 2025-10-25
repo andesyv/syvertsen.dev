@@ -1,6 +1,13 @@
-import React from "react";
+"use client";
+import { DateTime, Interval } from "luxon";
 
-const Page: React.FC = () => {
+const birthday = DateTime.local(1997, 3, 6);
+
+export default function Page() {
+  const age = Math.floor(
+    Interval.fromDateTimes(birthday, DateTime.local()).length("years"),
+  );
+
   return (
     <section>
       {/*<a href={socialLinks.twitter} target="_blank">*/}
@@ -22,18 +29,17 @@ const Page: React.FC = () => {
       <div className="prose prose-neutral dark:prose-invert">
         <p>
           I'm a fullstack developer with a passion for computer graphics and
-          real-time rendering. ? years of age, I am currently a full-time
-          developer at{" "}
-          <a href="https://graphisoft.com">Graphisoft</a>. Recently, I also
-          completed a masters degree in informatics specialized in visualization
-          and I also have a bachelors degree in games and games technology.
+          real-time rendering. {age}{" "}
+          years of age, I am currently a employed as a full-time
+          developer{/* at{" "} <a href="https://graphisoft.com">Graphisoft</a>*/}.
+          I got a masters degree in informatics specialized in visualization and
+          a bachelors degree in games and games technology.
         </p>
         <p>
-          Contact me about anything at {"<topic or whatever>@syvertsen.dev"}
+          Contact me about anything at{" "}
+          <code>{"<topic or whatever>@syvertsen.dev"}</code>.
         </p>
       </div>
     </section>
   );
-};
-
-export default Page;
+}

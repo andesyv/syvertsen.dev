@@ -31,11 +31,8 @@ $ deno run dev
 ```
 
 ## TODOs
-
-- Fix up the messy typings around the template project
 - Birthday confetti
 - Show source urls on projects page
-- Make an inline code block for showing email on front page
 - Fix deno deployment if necessary (https://vercel.com/docs/functions/runtimes)
 
 ## Licence

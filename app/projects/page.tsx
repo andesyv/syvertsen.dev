@@ -1,26 +1,14 @@
 "use server";
 
-import React from "react";
 import {
   ExtendedProjectData,
   populateProjectData,
   projects as originalProjects,
-} from "./data";
-import ProjectImg, { assertIsImageData } from "../components/projectimg";
-
-interface Props {
-  projects: ExtendedProjectData[];
-}
+} from "./data.ts";
+import ProjectImg from "../components/projectimg.tsx";
 
 const getMainProjectUrl = (project: ExtendedProjectData): string =>
   project.demo?.url ?? project.sourceUrl;
-
-function MaybeProjectImage(props: ExtendedProjectData) {
-  if (props.image) {
-    return <ProjectImg {...props.image} />;
-  }
-  return null;
-}
 
 export default async function Page() {
   const extendedProjects = await populateProjectData(originalProjects);
@@ -29,9 +17,6 @@ export default async function Page() {
       <h1 className="mb-8 text-2xl font-medium tracking-tight">Projects</h1>
       <div className="space-y-6">
         {extendedProjects.map((project, index) => {
-          if (project.image !== undefined) {
-            assertIsImageData(project.image);
-          }
           return (
             <a
               key={index}
@@ -54,7 +39,7 @@ export default async function Page() {
                     {description}
                   </p>
                 ))}
-                <MaybeProjectImage {...project} />
+                {project.image && <ProjectImg {...project.image} />}
               </div>
             </a>
           );
