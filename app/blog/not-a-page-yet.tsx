@@ -5,14 +5,14 @@
 // implement this functionality.
 // Yes, Next.js 15 is a real mess (14 and lower are cool).
 
-import Link from 'next/link';
-import { formatDate, getBlogPosts } from 'app/lib/posts';
+import Link from "next/link";
+import { formatDate, getBlogPosts } from "app/lib/posts";
 
 // Note to self: If I ever want RSS feeds, look at https://github.com/1msirius/Nextfolio/tree/main/app/feed for how to
 
 export const metadata = {
-  title: 'Blog',
-  description: 'Nextfolio Blog',
+  title: "Blog",
+  description: "Nextfolio Blog",
 };
 
 export default function BlogPosts() {
@@ -26,7 +26,7 @@ export default function BlogPosts() {
           .sort((a, b) => {
             if (
               new Date(a.metadata.publishedAt) >
-              new Date(b.metadata.publishedAt)
+                new Date(b.metadata.publishedAt)
             ) {
               return -1;
             }
@@ -38,8 +38,7 @@ export default function BlogPosts() {
               className="flex flex-col space-y-1 mb-4 transition-opacity duration-200 hover:opacity-80"
               href={`/blog/${post.slug}`}
             >
-              <div
-                className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
+              <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
                 <p className="text-black dark:text-white tracking-tight">
                   {post.metadata.title}
                 </p>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Page: React.FC = () => {
   return (
@@ -23,13 +23,13 @@ const Page: React.FC = () => {
         <p>
           I'm a fullstack developer with a passion for computer graphics and
           real-time rendering. ? years of age, I am currently a full-time
-          developer at <a href="https://graphisoft.com">Graphisoft</a>.
-          Recently, I also completed a masters degree in informatics
-          specialized in visualization and I also have a bachelors degree
-          in games and games technology.
+          developer at{" "}
+          <a href="https://graphisoft.com">Graphisoft</a>. Recently, I also
+          completed a masters degree in informatics specialized in visualization
+          and I also have a bachelors degree in games and games technology.
         </p>
         <p>
-          Contact me about anything at {'<topic or whatever>@syvertsen.dev'}
+          Contact me about anything at {"<topic or whatever>@syvertsen.dev"}
         </p>
       </div>
     </section>

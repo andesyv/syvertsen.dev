@@ -1,6 +1,6 @@
-import React from 'react';
-import Image from 'next/image';
-import { isWebUri } from 'valid-url';
+import React from "react";
+import Image from "next/image";
+import { isWebUri } from "valid-url";
 //import Tilt from 'react-tilt';
 //import { ExtendedImageData } from '../data/data';
 //import Container from 'react-bootstrap/Container';
@@ -13,14 +13,14 @@ export interface ImageData {
 }
 
 export function instanceOfImageData(obj: object): obj is ImageData {
-  return 'uri' in obj && 'alt' in obj && 'width' in obj && 'height' in obj;
+  return "uri" in obj && "alt" in obj && "width" in obj && "height" in obj;
 }
 
 export function assertIsImageData(value: object): asserts value is ImageData {
-  if (!instanceOfImageData(value)) throw new Error('Not ExtendedImageData');
+  if (!instanceOfImageData(value)) throw new Error("Not ExtendedImageData");
 }
 
-const isGif = (url: string) => url.slice(url.length - 4) === '.gif';
+const isGif = (url: string) => url.slice(url.length - 4) === ".gif";
 
 //class StaticImage extends React.PureComponent<ImageData, React.CSSProperties> {
 //  constructor(props: ImageData) {
@@ -87,8 +87,8 @@ const isGif = (url: string) => url.slice(url.length - 4) === '.gif';
 //export default ProjectImg;
 
 export default function ProjectImg(props: ImageData) {
-//  assertIsImageData(props);
-  console.log('Rendering %o', props);
+  //  assertIsImageData(props);
+  console.log("Rendering %o", props);
   const imageIsUrl = isWebUri(props.uri) !== undefined;
   return (
     <Image
@@ -105,4 +105,3 @@ export default function ProjectImg(props: ImageData) {
     />
   );
 }
-

@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 interface Props {
   error: Error;
-//  reset: () => void;
+  //  reset: () => void;
 }
 
 export default function Error({
-                                error,
-                              }: Props) {
+  error,
+}: Props) {
   useEffect(() => {
     console.error(error);
   }, [error]);

@@ -1,13 +1,12 @@
-'use server';
+"use server";
 
-import React from 'react';
-import { ExtendedProjectData, projects as originalProjects, populateProjectData } from './data';
-import /*ProjectImg,*/ { assertIsImageData } from '../components/projectimg';
-
-//export const metadata: Metadata = {
-//  title: 'Projects',
-//  description: 'My Projects',
-//};
+import React from "react";
+import {
+  ExtendedProjectData,
+  populateProjectData,
+  projects as originalProjects,
+} from "./data";
+import ProjectImg, { assertIsImageData } from "../components/projectimg";
 
 interface Props {
   projects: ExtendedProjectData[];
@@ -16,28 +15,12 @@ interface Props {
 const getMainProjectUrl = (project: ExtendedProjectData): string =>
   project.demo?.url ?? project.sourceUrl;
 
-function MaybeProjectImage(_props: ExtendedProjectData) {
-//  if (props.image) {
-//    return (<ProjectImg {...props.image} />);
-//  }
+function MaybeProjectImage(props: ExtendedProjectData) {
+  if (props.image) {
+    return <ProjectImg {...props.image} />;
+  }
   return null;
 }
-
-//const isGif = (url: string) => url.slice(url.length - 4) === '.gif'
-//
-//const ProjectImage: React.FC<{ url: string, alt: string }> = ({ url, alt }) => {
-//  const imageUrl = isWebUri(url) !== undefined ? url : `/projects/${url}`;
-//  return (<Image
-//    src={imageUrl}
-//    alt={alt}
-//    width={160}
-//    height={160}
-//    unoptimized={isGif(imageUrl)}
-//  />);
-//};
-
-// TODO: Fix images
-// TODO: Some of the project descriptions should have an optional url displayed in a custom link (i.e. ThonkBot)
 
 export default async function Page() {
   const extendedProjects = await populateProjectData(originalProjects);
@@ -62,9 +45,6 @@ export default async function Page() {
                   <span className="text-black dark:text-white font-medium tracking-tight">
                     {project.title}
                   </span>
-                  {/*<span className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm">*/}
-                  {/*  {project.year}*/}
-                  {/*</span>*/}
                 </div>
                 {project.descriptions.map((description, index) => (
                   <p
@@ -82,5 +62,4 @@ export default async function Page() {
       </div>
     </section>
   );
-};
-
+}
