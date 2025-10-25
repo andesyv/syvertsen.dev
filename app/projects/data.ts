@@ -1,6 +1,6 @@
 import sizeOf from "image-size";
 import { isWebUri } from "valid-url";
-import { ImageData as ExtendedImageData } from "../components/projectimg.tsx";
+import { ImageData as ExtendedImageData } from "../components/projectimg";
 import process from "node:process";
 import { tmpdir } from "os";
 import { randomBytes } from "crypto";

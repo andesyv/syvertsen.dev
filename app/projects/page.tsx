@@ -5,7 +5,7 @@ import {
   populateProjectData,
   projects as originalProjects,
 } from "./data.ts";
-import ProjectImg from "../components/projectimg.tsx";
+import ProjectImg from "../components/projectimg";
 
 const getMainProjectUrl = (project: ExtendedProjectData): string =>
   project.demo?.url ?? project.sourceUrl;

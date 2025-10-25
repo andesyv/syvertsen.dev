@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ThemeSwitch } from "./theme-switch.tsx";
+import { ThemeSwitch } from "./theme-switch";
 
 interface NavItem {
   path: string;

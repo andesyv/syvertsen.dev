@@ -31,7 +31,6 @@ $ deno run dev
 ```
 
 ## TODOs
-- Birthday confetti
 - Show source urls on projects page
 - Fix deno deployment if necessary (https://vercel.com/docs/functions/runtimes)
 

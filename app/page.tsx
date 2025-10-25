@@ -1,12 +1,18 @@
 "use client";
 import { DateTime, Interval } from "luxon";
+import dynamic from "next/dynamic";
 
 const birthday = DateTime.local(1997, 3, 6);
+
+const todayIsBirthday = () => DateTime.local().month == birthday.month && DateTime.local().day === birthday.day;
 
 export default function Page() {
   const age = Math.floor(
     Interval.fromDateTimes(birthday, DateTime.local()).length("years"),
   );
+
+  // Force component to be loaded without SSR, as it cannot be rendered server-side
+  const FullscreenConfetti = dynamic(() => import("./components/fullscreenconfetti"), { ssr: false });
 
   return (
     <section>
@@ -25,6 +31,7 @@ export default function Page() {
       {/*<h1 className="mb-8 text-2xl font-medium tracking-tight">*/}
       {/*  Portfolio, made simple!*/}
       {/*</h1>*/}
+      {todayIsBirthday() && <FullscreenConfetti /> }
 
       <div className="prose prose-neutral dark:prose-invert">
         <p>

@@ -1,6 +1,6 @@
 import { FaGithub } from "react-icons/fa6";
 import { TbMailFilled } from "react-icons/tb";
-import Copydate from "./copydate.tsx";
+import Copydate from "./copydate";
 
 interface SocialLinksProps {
   github: string;
