@@ -1,12 +1,9 @@
-import sizeOf from "image-size";
+import { imageSize } from "image-size";
+// import { imageSizeFromFile } from "image-size/fromFile" // Doesn't play ball too nicely with module resolution
 import { isWebUri } from "valid-url";
 import { ImageData as ExtendedImageData } from "../components/projectimg";
 import process from "node:process";
-import { tmpdir } from "os";
-import { randomBytes } from "crypto";
-import path from "path";
-import { isDeno, isNode, isBun } from "runtimey";
-import { realpath } from "fs/promises";
+import { isBun, isNode } from "runtimey";
 
 export interface SimpleImageData {
   uri: string;
@@ -156,88 +153,46 @@ interface ImageDims {
   height: number;
 }
 
-const getRemoteImageSizeWithDeno = async (url: string): Promise<ImageDims> => {
-  const response = await fetch(url);
-  if (response.body === null) {
-    throw new Error(`Failed to fetch ${url}`);
-  }
-
-  const tempFile = await Deno.makeTempFile();
-  {
-    const file = await Deno.open(tempFile, { write: true });
-    await response.body.pipeTo(file.writable);
-  }
-  const { width, height } = sizeOf(tempFile);
-  Deno.remove(tempFile);
-  return {
-    width: width ?? 0,
-    height: height ?? 0,
-  };
-};
-
-const getTempPath = async (): Promise<string> => {
-  const tempDir = await realpath(tmpdir());
-  const filename = `temp_image_${randomBytes(4).readUInt32LE(0)}`;
-  return path.join(tempDir, filename);
-};
-
-const getRemoteImageSizeWithNode = async (url: string): Promise<ImageDims> => {
-  const { unlink, writeFile } = await import("fs/promises");
-
-  const response = await fetch(url);
-  if (!response.ok) {
-    return Promise.reject(`Could not fetch the url ${url}`);
-  }
-
-  const tempFile = await getTempPath();
-  await writeFile(tempFile, await response.bytes());
-  const { width, height } = sizeOf(tempFile);
-  unlink(tempFile);
-  return {
-    width: width ?? 0,
-    height: height ?? 0,
-  };
-};
-
-const getRemoteImageSizeWithBun = async (url: string): Promise<ImageDims> => {
-  const response = await Bun.fetch(url);
-  if (response.body === null) {
-    throw new Error(`Failed to fetch ${url}`);
-  }
-
-  const tempFile = await getTempPath();
-  await Bun.write(tempFile, await response.bytes());
-  const { width, height } = sizeOf(tempFile);
-  Bun.file(tempFile).delete();
-  return {
-    width: width ?? 0,
-    height: height ?? 0,
-  };
-};
-
 const getRemoteImageSize = async (url: string): Promise<ImageDims> => {
-  if (isDeno) {
-    return await getRemoteImageSizeWithDeno(url);
+  const response = isBun ? await Bun.fetch(url) : await fetch(url);
+  if (!response.ok || response.body === null) {
+    throw new Error(`Failed to fetch ${url}`);
+  }
+
+  const bytes = await response.bytes();
+  if (!(bytes instanceof Uint8Array)) {
+    throw new TypeError("Not a Uint8Array. We were lied to!");
+  }
+  const { width, height } = imageSize(bytes);
+  return {
+    width: width ?? 0,
+    height: height ?? 0,
+  };
+};
+
+const readBytes = async (path: string): Promise<Uint8Array<ArrayBuffer>> => {
+  if (isBun) {
+    return await Bun.file(path).bytes();
   } else if (isNode) {
-    return await getRemoteImageSizeWithNode(url);
-  } else if (isBun) {
-    return await getRemoteImageSizeWithBun(url);
+    const { readFile } = await import("fs/promises");
+    return await readFile(path);
   } else {
     throw new Error("Unhandled runtime");
   }
-};
+}
 
-const getDims = (path: string): Promise<ImageDims> => {
+const getDims = async (path: string): Promise<ImageDims> => {
   const webUrl = isWebUri(path);
   if (webUrl !== undefined) {
-    return getRemoteImageSize(webUrl);
+    return await getRemoteImageSize(webUrl);
   }
-
-  const { width, height } = sizeOf(`${process.cwd()}/public/projects/${path}`);
-  return Promise.resolve({
+ 
+  const filePath = `${process.cwd()}/public/projects/${path}`;
+  const { width, height } = imageSize(await readBytes(filePath));
+  return {
     width: width ?? 0,
     height: height ?? 0,
-  });
+  };
 };
 
 const populateImageData = async (
@@ -272,3 +227,4 @@ export async function populateProjectData(
     }),
   );
 }
+
