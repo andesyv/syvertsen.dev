@@ -5,7 +5,8 @@ import process from "node:process";
 import { tmpdir } from "os";
 import { randomBytes } from "crypto";
 import path from "path";
-import { isDeno, isNode } from "runtimey";
+import { isDeno, isNode, isBun } from "runtimey";
+import { realpath } from "fs/promises";
 
 export interface SimpleImageData {
   uri: string;
@@ -174,14 +175,14 @@ const getRemoteImageSizeWithDeno = async (url: string): Promise<ImageDims> => {
   };
 };
 
-const getRemoteImageSizeWithNode = async (url: string): Promise<ImageDims> => {
-  const { realpath, unlink, writeFile } = await import("fs/promises");
+const getTempPath = async (): Promise<string> => {
+  const tempDir = await realpath(tmpdir());
+  const filename = `temp_image_${randomBytes(4).readUInt32LE(0)}`;
+  return path.join(tempDir, filename);
+};
 
-  const getTempPath = async (): Promise<string> => {
-    const tempDir = await realpath(tmpdir());
-    const filename = `temp_image_${randomBytes(4).readUInt32LE(0)}`;
-    return path.join(tempDir, filename);
-  };
+const getRemoteImageSizeWithNode = async (url: string): Promise<ImageDims> => {
+  const { unlink, writeFile } = await import("fs/promises");
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -198,11 +199,29 @@ const getRemoteImageSizeWithNode = async (url: string): Promise<ImageDims> => {
   };
 };
 
+const getRemoteImageSizeWithBun = async (url: string): Promise<ImageDims> => {
+  const response = await Bun.fetch(url);
+  if (response.body === null) {
+    throw new Error(`Failed to fetch ${url}`);
+  }
+
+  const tempFile = await getTempPath();
+  await Bun.write(tempFile, await response.bytes());
+  const { width, height } = sizeOf(tempFile);
+  Bun.file(tempFile).delete();
+  return {
+    width: width ?? 0,
+    height: height ?? 0,
+  };
+};
+
 const getRemoteImageSize = async (url: string): Promise<ImageDims> => {
   if (isDeno) {
     return await getRemoteImageSizeWithDeno(url);
   } else if (isNode) {
     return await getRemoteImageSizeWithNode(url);
+  } else if (isBun) {
+    return await getRemoteImageSizeWithBun(url);
   } else {
     throw new Error("Unhandled runtime");
   }
